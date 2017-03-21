@@ -1,0 +1,47 @@
+{
+  "pages":[
+
+   "pages/index/index",
+   "pages/search/search",
+   "pages/member/member",
+   "pages/address/address",
+   "pages/order/order",
+   "pages/detail/detail",
+      "pages/orderlist/orderlist",
+    "pages/car/car"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "e衫订制",
+    "navigationBarTextStyle":"black"
+  },
+    "tabBar": {
+    "color": "#333",
+    "selectedColor": "#DC3737",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "position":"bottom",
+    "list": [
+      {
+        "iconPath": "img/home.png",
+        "selectedIconPath": "img/home1.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },     
+      {
+        "iconPath": "img/search.png",
+        "selectedIconPath": "img/search1.png",
+        "pagePath": "pages/search/search",
+        "text": "搜索"
+      },
+      {
+        "iconPath": "img/member.png",
+        "selectedIconPath": "img/member1.png",
+        "pagePath": "pages/member/member",
+        "text": "个人中心"
+      }
+    ]
+  }
+
+}

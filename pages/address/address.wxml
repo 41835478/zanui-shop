@@ -1,0 +1,84 @@
+<!--pages/address/address.wxml-->
+<import src="/dist/toptips/index.wxml" />
+<veiw class="container">
+<template is="zan-toptips" data="{{ zanTopTips }}"></template>
+
+<view class="zan-panel" style="margin-top:0px">
+<block wx:for="{{addresslist}}">
+<view class="zan-cell zan-cell--access">
+	<view class="zan-cell__hd zan-cell-hd-margin"><view class="zan-icon {{ checked == index? 'zan-icon-checked' : 'zan-icon-check' }} zan-c-blue" style="font-size: 18px;" id="{{index}}"  bindtap="checked"></view></view>
+	<view class="zan-cell__bd" id="{{index}}" bindtap="changeAddress">
+	   <view class="zan-pull-up zan-font-16">{{item.name}}<text>{{item.mobile}}</text></view>
+		<view class="zan-font-12 zan-c-gray-dark">收货地址：{{item.address}}</view>
+	</view>
+	<veiw class="zan-cell__ft"></veiw>
+</view>
+</block>
+</view>
+
+
+
+<view class="zan-panel addbtn" bindtap="toggleDialog">
+<view class="zan-cell zan-cell--access">
+	<view class="zan-cell__hd zan-cell-hd-margin"><view class="zan-icon zan-icon-location zan-c-blue"></view></view>
+	<view class="zan-cell__bd">新增收货地址</view>
+	<veiw class="zan-cell__ft"></veiw>
+</view>
+</view>
+<!-- 新增地址结束 -->
+
+
+<view class="container">
+  <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+    <view class="zan-dialog__mask" bindtap="toggleDialog" />
+    <view class="zan-dialog__container">
+    <view class="zan-icon zan-icon-close addclose zan-pull-right" bindtap="toggleDialog"></view>
+ 		<form bindsubmit="formBindsubmit">
+ 		<input name="id" type="hidden" value="{{currentId}}" hidden="true" />
+	    <view class="zan-cell zan-form__item">
+		<view class="zan-cell__hd zan-cell-hd-margin">收 货 人</view>
+		<view class="zan-cell__bd"><input
+        class="zan-form__input zan-cell__bd" name="name"
+        placeholder="名字" value="{{changeaddress.name}}"
+      /></view>
+		<veiw class="zan-cell__ft"></veiw>
+	    </view>
+
+	    <view class="zan-cell">
+		<view class="zan-cell__hd zan-cell-hd-margin">联系电话</view>
+		<view class="zan-cell__bd"><input
+        class="zan-form__input zan-cell__bd"  name="mobile"
+        type="number"
+        maxlength="20"
+        placeholder="手机或固定电话" value="{{changeaddress.mobile}}"
+      /></view>
+		<veiw class="zan-cell__ft"></veiw>
+	    </view>
+
+	    <view class="zan-cell">
+		<view class="zan-cell__hd zan-cell-hd-margin">收货地区</view>
+		<view class="zan-cell__bd">江苏大学本部<text class="zan-c-gray-dark zan-font-12">（目前仅支持江大）</text></view>
+		<veiw class="zan-cell__ft"></veiw>
+	    </view>
+
+	    <view class="zan-cell">
+		<view class="zan-cell__hd zan-cell-hd-margin">详细地址</view>
+		<view class="zan-cell__bd"><input
+        class="zan-form__input zan-cell__bd" name="address" value="{{changeaddress.address}}"
+        placeholder="详细到宿舍地址"
+      /></view>
+		<veiw class="zan-cell__ft"></veiw>
+	    </view>
+
+	    <view class="zan-btns">
+        <button class="zan-btn zan-btn--primary" formType="submit">确认</button>
+         <button class="zan-btn zan-btn--danger" bindtap="removeaddress" hidden="{{ currentId ? false:true}}">清除所有地址</button>
+        </view>
+		</form>
+    </view>
+    </view>
+  </view>
+
+
+
+</veiw>

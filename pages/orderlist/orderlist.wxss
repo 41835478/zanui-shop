@@ -1,0 +1,18 @@
+/* pages/orderlist/orderlist.wxss */
+.tab{
+	position: fixed;
+	top: 0;
+	left: 0;
+	widows: 100%;
+	z-index: 10;
+}
+.swiper{
+	width: 100%;
+	background-color: #f9f9f9;
+
+}
+.panel-no-border::after{
+	border-top: 0;
+	border-bottom: 0;
+
+}

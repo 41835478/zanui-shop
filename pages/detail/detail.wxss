@@ -1,0 +1,110 @@
+/* pages/detail/detail.wxss */
+page{
+	background-color: #F9F9F9;
+	padding-bottom: 60px; 
+}
+
+.detail{
+	margin: 5px 0px;
+}
+
+
+/*轮播样式*/
+.swiper{
+ position: relative;
+}
+.swiper .dots{
+ position: absolute;
+ left: 0;
+ right: 0;
+ bottom: 20rpx;
+ display: flex;
+ justify-content: center;
+}
+.swiper .dots .dot{
+ margin: 0 8rpx;
+ width: 14rpx;
+ height: 14rpx;
+ background:#fff;
+ border-radius: 8rpx;
+ transition: all .6s;
+}
+.swiper .dots .dot.active{
+ width: 24rpx;
+ background:#f80;
+  width: 28rpx;
+ height: 14rpx;
+}
+
+
+.swiper-container{
+	height:500rpx;
+}
+.slide-image{
+	width: 100%;
+}
+.flex-item{
+	display: flex;
+	flex-direction: row;
+	/*align-items: center;*/
+	-webkit-box-flex: 1;
+     -webkit-flex: 1;
+     flex: 1;
+}
+.flex-item view{
+	margin-right: 5px;
+}
+
+.btn-container{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background-color:white;
+	z-index: 10;
+}
+.btn-flex-item{
+	float: left;
+}
+.dialog_detail image{
+	width:150px;
+	height:150px;
+	border-radius:10rpx;
+	margin-top:-80rpx;
+	margin-right:20rpx;
+	background-color: #f9f9f9;
+	-moz-box-shadow:5px 5px 5px #999 inset;               /* For Firefox3.6+ */
+	-webkit-box-shadow:5px 5px 5px #999 inset;            /* For Chrome5+, Safari5+ */
+	box-shadow:5px 5px 5px #999 inset;                    /* For Latest Opera */
+}
+.zan-icon-close{
+	float: right;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 18px;
+}
+.dialog_quantity{
+	float: right;
+	right: 10px;
+}
+.dialog_option{
+	display: block;
+}
+.zan-toast {
+  position: fixed;
+  top: 35%;
+  left: 20%;
+  transform: translateZ(0) translateY(-100%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 14px;
+  width: 60%;
+  line-height: 1.5em;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  z-index: 100;
+}
+

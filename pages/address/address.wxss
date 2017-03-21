@@ -1,0 +1,18 @@
+/* pages/address/address.wxss */
+.container{
+
+}
+.addbtn{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 10;
+}
+.zan-cell-hd-margin{
+	 margin-right: 10px;
+}
+.addclose{
+	font-size: 16px;
+	margin-right: 30rpx; 
+	margin-top: 30rpx; 
+}

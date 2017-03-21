@@ -1,0 +1,89 @@
+<!--pages/order/order.wxml-->
+<import src="/dist/switch/index.wxml" />
+<view class="container">
+<navigator url="../../pages/address/address">
+	<view class="zan-panel" style="margin-top: 0px;">
+	<view class="zan-cell zan-cell--access">
+	
+		<view class="zan-cell__hd" style="margin-right: 5px;"><view class="zan-icon zan-icon-location" style="font-size: 18px;"></view></view>
+		<block wx:if="{{address}}">
+		<view class="zan-cell__bd">
+		<view class="zan-pull-up zan-font-16">收货人：{{address.name}}<text class="zan-pull-right">{{address.mobile}}</text></view>
+		<view class="zan-font-12 zan-c-gray-dark">收货地址：江苏大学本部 {{address.address}}</view>
+		</view>
+		<view class="zan-cell__ft"></view>
+		</block>
+		<block wx:else>
+		<view class="zan-cell__bd">请选择地址</view>
+		<view class="zan-cell__ft"></view>	
+		</block>
+
+	</view>
+	</view>
+		</navigator>
+	<!-- 收货地址结束 -->
+	<view class="zan-panel">
+	<view class="zan-cell panel-no-border">
+	<view class="zan-cell__hd" style="margin-right: 5px;"><view class="zan-icon zan-icon-store" style="font-size: 18px;"></view></view>
+	<view class="zan-cell__bd">eshandz商城</view>
+	</view>
+	<view class="zan-cell panel-no-border" style="background-color: #f9f9f9;">
+	<view class="zan-cell__hd" style="margin-right: 5px;background-color: #F9F9F9"><image src="{{chooseoptionthumb}}" style="width: 200rpx;height: 200rpx"></image></view>
+	<view  class="zan-cell__hd">
+	<view class="zan-font-16"><view class="zan-pull-left" style="width: 80%;">{{good.title}}</view><view class="zan-c-red zan-pull-right" style="width: 20%;text-align: right;">￥{{good.marketprice}}</view></view>
+
+	<view class="zan-font-12 zan-c-gray-dark"><view class="zan-pull-left" style="width: 80% ">规格：黑色+175</view><view class="zan-pull-right" style="width: 20%;text-align: right;">×{{quantity}}</view></view>
+	</view>
+	</view>
+
+	<view class="zan-cell">
+	<view class="zan-cell__hd zan-font-12" style="margin-right: 5px;">配送方式</view>
+	<view class="zan-cell__bd"></view>
+	<view class="zan-cell__ft zan-c-gray-dark zan-font-12">e衫订制</view>
+	</view>
+
+	<view class="zan-cell">
+	<view class="zan-cell__hd zan-font-12" style="margin-right: 100rpx;">留言</view>
+	<input class="zan-form__input zan-cell__bd zan-font-12" placeholder="点击给商家留言"/>	
+	</view>
+
+
+	<view class="zan-cell">
+	<view class="zan-cell__hd zan-font-12" style="margin-right: 5px;">合计</view>
+	<view class="zan-cell__bd"></view>
+	<view class="zan-cell__ft zan-c-red zan-font-12">￥{{good.marketprice * quantity}}</view>
+	</view>
+
+	</view>
+	<!-- 商品详情结束 -->
+	<view class="zan-panel">
+	<view class="zan-cell zan-cell--access">
+	<view class="zan-cell__hd zan-font-12" style="margin-right: 5px;">优惠</view>
+	<view class="zan-cell__bd"></view>
+	<view class="zan-cell__ft zan-font-12">使用优惠</view>
+	</view>
+	</view>
+	<!-- 优惠结束 -->
+	<view class="zan-panel">
+	<view class="zan-cell">
+	<view class="zan-cell__hd zan-font-12" style="margin-right: 5px;">开启通知</view>
+	<view class="zan-cell__bd"></view>
+	<view class="zan-cell__ft zan-font-12"> <template is="zan-switch" data="{{ ...sync, componentId: 'sync' }}" /></view>
+	</view>
+	</view>
+	<!-- 开启通知结束 -->
+	<view class="zan-panel">
+	<view class="panel-no-border zan-cell zan-font-12">
+	<view class="zan-cell__bd">商品金额</view><view class="zan-cell__ft">￥{{good.marketprice * quantity}}</view>	
+	</view>
+	<view class="panel-no-border zan-cell zan-font-12">
+	<view class="zan-cell__bd">运费</view><view class="zan-cell__ft">+￥0</view>	
+	</view>
+	</view>
+	<!-- 费用介绍结束 -->
+	<view class="zan-panel btn-container" style="width: 100%">
+	<view class="tongji-btn zan-pull-left">合计：<text class="zan-c-red">￥{{good.marketprice * quantity}}</text></view>
+    <button class="zan-btn zan-btn--large zan-btn--danger zan-pull-right" style="width: 40%" bindtap="toggleDialog">提交<text wx:if="{{ actionId ==1 }}">体验</text><text wx:else>订单</text></button>
+	</view>
+
+</view>

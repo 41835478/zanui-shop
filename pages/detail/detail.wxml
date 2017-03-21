@@ -1,0 +1,108 @@
+
+<!--pages/detail/detail.wxml-->
+<import src="/dist/quantity/index.wxml" />
+<import src="/dist/toptips/index.wxml" />
+<view class="container">
+
+<template is="zan-toptips" data="{{ zanTopTips }}"></template>
+
+  <view class="swiper">
+    <swiper class="swiper-container" autoplay="true" interval="3000" duration="500" current="{{swiperCurrent}}" bindchange="swiperChange">
+      <block wx:for="{{slider}}" wx:key="unique">
+        <swiper-item>
+          <image src="{{item}}" mode="widthFix" class="slide-image"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="dots">
+      <block wx:for="{{slider}}" wx:key="unique">
+        <view class="dot{{index == swiperCurrent+1 ? ' active' : ''}}"></view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 商品轮播结束 -->
+  <view class="zan-panel" style="margin-top: 0px;padding: 20px 10px 0px 10px;">
+    <view class="detail detail-title zan-font-bold zan-font-18">{{good.title}}</view>
+    <view class="detail detail-price zan-c-red zan-font-18">￥{{good.marketprice}}<text class="zan-c-black zan-font-12">/{{good.unit}}</text></view>
+    <view class="detail detail-price zan-text-deleted zan-font-16 zan-c-gray-dark">{{good.productprice}}</view>
+    <view class="zan-cell zan-font-16">
+      <view class="zan-cell__bd zan-c-gray-dark">运费：￥0</view>
+      <view class="zan-cell__ft zan-c-gray-dark">剩余：{{good.sales}}</view>
+    </view>
+    <view class="zan-cell zan-cell--access">
+      <view class="zan-cell__bd zan-font-12">
+        <view class="zan-label zan-label--primary zan-label--small zan-label--plain">满减</view>
+        <view class="zan-label zan-label--primary zan-label--small zan-label--plain">免邮</view>满90元减5元
+      </view>
+      <view class="zan-cell__ft"></view>
+    </view>
+  </view>
+
+  <!-- 活动结束 -->
+  <view class="zan-panel">
+    <view class="zan-cell">
+      <view class="flex-item">
+        <view class="zan-icon zan-icon-certificate" style="font-size: 16px;color:#32cd32"></view>店铺认证
+      </view>
+      <view class="flex-item">
+        <view class="zan-icon zan-icon-certificate" style="font-size: 16px;color:#32cd32"></view>免费体验
+      </view>
+      <view class="flex-item">
+        <view class="zan-icon zan-icon-certificate" style="font-size: 16px;color:#32cd32"></view>线下门店
+      </view>
+    </view>
+  </view>
+
+  <!-- 绿色通道结束 -->
+  <view class="zan-panel">
+    <view class="zan-cell zan-font-18">商品详情</view>
+    <block wx:for="{{good.content}}">
+      <image src="{{item}}" mode="widthFix" style="width: 100%"></image>
+    </block>
+  </view>
+
+  <!-- 商品详情结束 -->
+  <view class="zan-panel btn-container" style="width: 100%">
+    <button bindtap="tohome" class="zan-btn zan-btn--large btn-flex-item" style="width: 20%;border-right: 1px solid #F0F0F0">
+      <view class="zan-icon zan-icon-home" style="font-size: 16px;display: block;"></view>首页</button>
+    <button bindtap="totiyan" class="zan-btn zan-btn--large btn-flex-item" style="width: 20%">
+      <view class="zan-icon zan-icon-store" style="font-size: 16;display: block;"></view>体验包</button>
+    <button class="zan-btn zan-btn--large zan-btn--warn btn-flex-item" style="width:30%" bindtap="toggleDialog" data-actionid="1">立即体验</button>
+    <button class="zan-btn zan-btn--large zan-btn--danger btn-flex-item" style="width: 30%" bindtap="toggleDialog" data-actionid="2">立即购买</button>
+  </view>
+
+  <!-- 按钮组结束 -->
+  <view class="container">
+    <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+      <view class="zan-dialog__mask" bindtap="toggleDialog" />
+      <view class="zan-dialog__container">
+        <view class="zan-cell dialog_detail">
+          <image src="{{chooseoptionthumb}}"></image>
+          <text style="margin-right: 15px;">
+            <text>{{good.title}}</text>\n
+            <text class="zan-c-red zan-font-18">￥{{good.marketprice}}</text>
+          </text>
+          <view class="zan-icon zan-icon-close" bindtap="toggleDialog"></view>
+        </view>
+        <block wx:for="{{good.option}}" wx:for-index="i">
+          <view class="panel-no-border zan-cell">
+            <view class="dialog_option">{{item.title}}：
+              <block wx:for="{{item.content}}">
+                <text class="zan-label {{ chooseOptionId[i] == item.id ? 'zan-label--primary' : '' }}" id="{{item.id}}" data-option="{{i}}" data-chooseoptionthumb="{{item.thumb}}" bindtap="chooseOptionId">{{item.name}} </text>
+              </block>
+            </view>
+          </view>
+        </block>
+        <view class="zan-cell">
+          <text>数量：</text>
+          <template class="dialog_quantity" is="zan-quantity" data="{{ ...quantity1, componentId: 'quantity1', size: 'small' }}" />
+        </view>
+        <button bindtap="confirm" class="zan-btn zan-btn--large zan-btn--danger btn-flex-item" style="width: 100%">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交弹窗结束 -->
+
+</view>
