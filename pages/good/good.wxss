@@ -1,0 +1,13 @@
+/* pages/good/good.wxss */
+page{
+	height: 100%;
+}
+.container{
+	padding: 2px 0px;
+}
+.goods{
+	margin: 5px 0px;
+}
+.goods image{
+	width: 100%; 
+}

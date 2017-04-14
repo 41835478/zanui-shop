@@ -18,7 +18,7 @@
 
 
 
-<view class="zan-panel addbtn" bindtap="toggleDialog">
+<view class="zan-panel addbtn" bindtap="chooseAddress">
 <view class="zan-cell zan-cell--access">
 	<view class="zan-cell__hd zan-cell-hd-margin"><view class="zan-icon zan-icon-location zan-c-blue"></view></view>
 	<view class="zan-cell__bd">新增收货地址</view>

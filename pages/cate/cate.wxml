@@ -1,0 +1,12 @@
+<!--pages/cate/cate.wxml-->
+<view class="container">
+	<block wx:for="{{category}}">
+	<navigator url="../../pages/good/good?cateid={{item.id}}">
+		<view class="zan-cell zan-cell--access">
+		<view class="zan-cell__hd"><image src="{{item.advimg}}"></image></view>	
+			<view class="zan-cell__bd">{{item.title}}</view>
+			<view class="zan-cell__ft"></view>
+		</view>
+		</navigator>
+	</block>
+</view>

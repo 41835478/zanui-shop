@@ -1,0 +1,20 @@
+<!--pages/good/good.wxml-->
+<import src="/dist/loadmore/index.wxml" />
+<view class="container" style="height: 100%">
+  <scroll-view scroll-y="true" style="height:100%" bindscrolltolower="loadMoreGoods">
+  <block wx:for="{{goods}}">
+    <navigator url="../../pages/detail/detail?goodsid={{item.id}}" hover-class="none">
+    <view class="goods">
+    <image src="{{item.thumb}}" mode="widthFix" ></image>
+    <view class="zan-c-black zan-ellipsis">{{item.title}}</view><view class="zan-c-gray-dark zan-font-12">来自e衫订制</view>       
+    </view>
+    </navigator>
+    </block>
+    <!-- 展示结束 -->
+    <view style="width: 100%;height:65px;float: left;">
+      <template class="loading" is="zan-loadmore" data="{{loading}}" />
+      <template is="zan-loadmore" data="{{nodata}}" />
+      <template is="zan-loadmore" data="{{nomore}}" />
+    </view>
+  </scroll-view>
+</view>

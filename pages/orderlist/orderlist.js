@@ -14,12 +14,12 @@ Page(Object.assign({}, Zan.Tab, {
         title: '正在体验'
       }, {
         id: '3',
-        title: '已体验'
+        title: '待发货'
       }, {
         id: '4',
-        title: '已付款'
+        title: '交易成功'
       }],
-      selectedId: 0,  
+      selectedId:0,  
     },
           scroll: false,
       windowHeight:'',
@@ -72,6 +72,9 @@ Page(Object.assign({}, Zan.Tab, {
   },
   onLoad:function(options){  
   // 页面初始化 options为页面跳转所带来的参数
+  this.setData({
+    selectedId:options['selectedId']
+  })
   },
   onReady:function(){
     // 页面渲染完成

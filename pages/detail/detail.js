@@ -104,14 +104,14 @@ Page(Object.assign({}, Zan.Quantity,Zan.TopTips,{
 
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    // console.log(options);
+    // console.log(app.globalData.token);
     var options=options.goodsid;
     var that = this;
 
    // console.log(that.data.option);
     wx.request({
       url:'https://api.eshandz.cn/api/index/detail',
-      data:{id:options,appid: wx.getStorageSync('appid'), token: wx.getStorageSync('token')},
+      data:{id:options,appid:app.globalData.appid, token:app.globalData.token},
       method:'get',
       success:function(res){
         // console.log(res); 

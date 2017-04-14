@@ -1,46 +1,17 @@
 <!--index.wxml-->
-<import src="/dist/tab/index.wxml" />
-<import src="/dist/loadmore/index.wxml" />
-<import src="/tpl/goodstpl.wxml"/>
-<view class="container">
-  <scroll-view scroll-y="true" style="height:{{windowHeight}}px" bindscrolltolower="lower">  
-    <view class="tab">
-    <template is="zan-tab" data="{{tab: tab, componentId: 'tab'}}"></template>
-    </view>
-    <!-- tab分类结束 -->
+ <navigator url="../../pages/detail/detail?goodsid={{goodsid}}" hover-class="none" style="height: 100%;  touch-action:pan-x;">
+<view class="bgcover" style="height:100%"></view>
+<image class="bgimg" src="{{bgimg}}" style="width: 100%;max-height:100%" mode="widthFix"></image>   
 
-
-    <view class="swiper">
-      <swiper class="swiper-container" autoplay="true" interval="3000" duration="500" current="{{swiperCurrent}}" bindchange="swiperChange">
-
-        <block wx:for="{{slider}}" wx:key="unique">
-   <swiper-item>
-    <image src="{{item}}" mode="widthFix" class="slide-image"></image>
-   </swiper-item>
-  </block>
-
-
-      </swiper>
-
-
-       <view class="dots">
-  <block wx:for="{{slider}}" wx:key="unique">
-   <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
-  </block>
- </view>
-
-
-    </view>
-    <!-- 轮播图结束 -->
- 
-       <template is="good" data="{{item}}" wx:for="{{goods}}" />
-
-    <!-- 展示结束 -->
-
-<view style="width: 100%;float: left;">
-  <template class="loading" is="zan-loadmore" data="{{loading}}" />
-  <template is="zan-loadmore" data="{{nodata}}" />
-  <template is="zan-loadmore" data="{{nomore}}" />
-</view>
-  </scroll-view>
-</view>
+        <swiper  style="height:100%"   bindchange="swiperChange">
+          <swiper-item  wx:for="{{goodsindex}}">
+          <view class="item-box">            
+            <image src="{{item.thumb}}"></image>
+            <view class="text-area">
+                <view class="zan-c-gray-dark">{{item.title}}</view>
+                <view class="zan-c-red">￥{{item.marketprice}}</view>              
+            </view>
+            </view>            
+          </swiper-item>
+        </swiper>
+</navigator>

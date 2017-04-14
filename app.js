@@ -2,7 +2,33 @@
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
-    var that = this  
+    var that = this 
+    wx.login({
+      success: function(res) {
+        if (res.code) {
+          // console.log(res.code);
+          that.globalData.code=res.code;
+  
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
+        }
+      }
+    });
+      //获取token
+      that.gettoken();
+        wx.getSystemInfo({
+          success: function(res) {
+           console.log(res);
+            that.globalData.windowHeight=res.windowHeight;
+        }      
+       })
+    },
+
+  util: require('utils/util.js'),
+
+
+  gettoken:function(){
+      var that = this  
       //获取token
    wx.request({
             url: 'https://api.eshandz.cn/api/auth/getToken',
@@ -15,23 +41,17 @@ App({
                 'content-type': 'application/json'
             }, // 设置请求的 header
             success: function (res) {
-                console.log(res)
-                wx.setStorageSync('appid', "5288971")
-                wx.setStorageSync('token', res.data.data)
+                console.log(res)              
                 that.globalData.token=res.data.data;
                 // that.globalData.appid="5288971";
+                // return res.data.data;
              },
             fail: function () {         
             },
             complete: function () {
             }
         })//请求token
-
-  var res = wx.getSystemInfoSync();
-  wx.setStorageSync('windowHeight',res.windowHeight);
-
-
-  }, 
+ },
 
   getUserInfo:function(cb){
     var that = this
@@ -54,6 +74,16 @@ App({
   globalData:{
     userInfo:null,
     token:null,
-    appid:null
+    appid:"5288971",
+    code:null,
+    windowHeight:null
+  },
+  siteInfo: {
+    'uniacid': '2', //公众号uniacid
+    'acid': '2', 
+    'multiid': '8907',  //小程序版本id
+    'version': '1.0.0',  //小程序版本
+    'siteroot': 'https://www.eshandz.cn/app/index.php',  //站点URL
+    'token': 'Rss035a6ogA8z1q8303E8OS1o361AaKD' //将用于接口中的数据安全校验
   }
 })

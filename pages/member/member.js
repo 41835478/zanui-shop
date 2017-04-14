@@ -1,6 +1,7 @@
 // pages/member/member.js
+var Zan = require('../../dist/index');
 var app=getApp();
-Page({
+Page(Object.assign({}, Zan.Toast, {
   data:{ 
   userinfo:[]   
   },
@@ -20,6 +21,14 @@ Page({
       })   
 
   },
+  showToast() {
+    this.showZanToast('本版本为测试版本V0.1。由彭思文提供技术支持！联系电话18852850996');
+  },
+  makephone(){
+    wx.makePhoneCall({
+      phoneNumber: '18860873809' //仅为示例，并非真实的电话号码
+    })
+  },
   onReady:function(){
     // 页面渲染完成
   },
@@ -32,4 +41,4 @@ Page({
   onUnload:function(){
     // 页面关闭
   }
-})
+}))

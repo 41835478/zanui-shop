@@ -1,39 +1,37 @@
 {
-  "pages":[
-
-   "pages/index/index",
-   "pages/search/search",
-   "pages/member/member",
-   "pages/address/address",
-   "pages/order/order",
-   "pages/detail/detail",
-      "pages/orderlist/orderlist",
-    "pages/car/car"
+  "pages": [
+    "pages/index/index",
+    "pages/member/member",
+    "pages/cate/cate",
+    "pages/order/order",
+    "pages/detail/detail",
+    "pages/orderlist/orderlist",
+    "pages/good/good"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "e衫订制",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
-    "tabBar": {
+  "tabBar": {
     "color": "#333",
     "selectedColor": "#DC3737",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
-    "position":"bottom",
+    "position": "bottom",
     "list": [
       {
         "iconPath": "img/home.png",
         "selectedIconPath": "img/home1.png",
         "pagePath": "pages/index/index",
         "text": "首页"
-      },     
+      },
       {
-        "iconPath": "img/search.png",
-        "selectedIconPath": "img/search1.png",
-        "pagePath": "pages/search/search",
-        "text": "搜索"
+        "iconPath": "img/category.png",
+        "selectedIconPath": "img/category1.png",
+        "pagePath": "pages/cate/cate",
+        "text": "分类"
       },
       {
         "iconPath": "img/member.png",
@@ -43,5 +41,4 @@
       }
     ]
   }
-
 }

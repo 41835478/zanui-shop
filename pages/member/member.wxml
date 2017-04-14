@@ -1,4 +1,5 @@
 <!--pages/member/member.wxml-->
+<import src="/dist/toast/index.wxml" />
 <view class="container">
 	<view class="userinfo">
 		<image src="{{userinfo.avatarUrl}}"></image>
@@ -13,19 +14,24 @@
 	    </view>
 	    </navigator>
 	    <view class="zan-cell">
-		<navigator url="../../pages/orderlist/orderlist" hover-class="none" class="flex-item"><view class="flex-item zan-badge"> <view class="zan-icon zan-icon-topay" style="font-size: 20px;"></view><view>待体验</view><view class="zan-badge__count">9</view></view></navigator>
-		<navigator url="../../pages/orderlist/orderlist" hover-class="none" class="flex-item"> <view class="flex-item zan-badge"> <view class="zan-icon zan-icon-send" style="font-size: 20px;"></view><view>正在配送</view><view class="zan-badge__count">8</view></view></navigator>
-		<navigator url="../../pages/orderlist/orderlist" hover-class="none" class="flex-item"> <view class="flex-item zan-badge"> <view class="zan-icon zan-icon-tosend" style="font-size: 20px;"></view><view>已体验</view><view class="zan-badge__count">10</view></view></navigator>
-		<navigator url="../../pages/orderlist/orderlist" hover-class="none" class="flex-item"> <view class="flex-item zan-badge"> <view class="zan-icon zan-icon-sign" style="font-size: 20px;"></view><view>已支付</view><view class="zan-badge__count">12</view></view></navigator>
+		<navigator url="../../pages/orderlist/orderlist?selectedId=1" hover-class="none" class="flex-item"><view class="flex-item zan-badge"> <view class="zan-icon zan-icon-topay" style="font-size: 20px;"></view><view>待体验</view><view class="zan-badge__count">9</view></view></navigator>
+		<navigator url="../../pages/orderlist/orderlist?selectedId=2" hover-class="none" class="flex-item"> <view class="flex-item zan-badge"> <view class="zan-icon zan-icon-send" style="font-size: 20px;"></view><view>正在体验</view><view class="zan-badge__count">8</view></view></navigator>
+		<navigator url="../../pages/orderlist/orderlist?selectedId=3" hover-class="none" class="flex-item"> <view class="flex-item zan-badge"> <view class="zan-icon zan-icon-tosend" style="font-size: 20px;"></view><view>待发货</view><view class="zan-badge__count">10</view></view></navigator>
+		<navigator url="../../pages/orderlist/orderlist?selectedId=4" hover-class="none" class="flex-item"> <view class="flex-item zan-badge"> <view class="zan-icon zan-icon-sign" style="font-size: 20px;"></view><view>交易成功</view><view class="zan-badge__count">12</view></view></navigator>
 	    </view>
 	    </view>
 
-	<view class="zan-panel">
-	<navigator url="../../pages/car/car" hover-class="none">
-	<view class="zan-cell zan-cell--access">
-		<view class="zan-cell__bd">购物车</view><view class="zan-cell__ft"></view>
-	</view>
-	</navigator>
-	</view>
-	
+	    <view class="zan-panel">
+	    <view class="zan-cell zan-cell--access" bindtap="makephone">
+	    	<view class="zan-cell__hd"></view>
+	    	<view class="zan-cell__bd">联系客服</view>
+	    	<view class="zan-cell__ft"></view>
+	    </view>
+	    <view class="zan-cell zan-cell--access" bindtap="showToast">
+	    	<view class="zan-cell__hd"></view>
+	    	<view class="zan-cell__bd">关于</view>
+	    	<view class="zan-cell__ft"></view>
+	    </view>
+	    </view>
 </view>
+<template is="zan-toast" data="{{ zanToast }}"></template>

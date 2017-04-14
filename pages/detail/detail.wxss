@@ -66,11 +66,9 @@ page{
 	float: left;
 }
 .dialog_detail image{
-	width:150px;
-	height:150px;
 	border-radius:10rpx;
-	margin-top:-80rpx;
-	margin-right:20rpx;
+	margin-top:-50px;
+	margin-right:5px;
 	background-color: #f9f9f9;
 	-moz-box-shadow:5px 5px 5px #999 inset;               /* For Firefox3.6+ */
 	-webkit-box-shadow:5px 5px 5px #999 inset;            /* For Chrome5+, Safari5+ */

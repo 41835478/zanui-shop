@@ -1,7 +1,7 @@
 <template name="good">
     <navigator url="../../pages/detail/detail?goodsid={{item.id}}" hover-class="none">
-    <view class="goods">
-    <image src="{{item.thumb}}"></image>
+    <view class="goods" style="height: {{(windowHeight/4)+86}}px">
+    <view style="height: {{(windowHeight/4)+50}}px;overflow: hidden;"><image src="{{item.thumb}}" mode="widthFix" ></image></view>
     <view class="zan-c-black zan-ellipsis">{{item.title}}</view><view class="zan-c-gray-dark">来自e衫订制</view>       
     </view>
     </navigator>
