@@ -161,8 +161,8 @@ Page(Object.assign({}, Zan.Switch,Zan.TopTips, {
         "title":that.data.good.title,
         "option":that.data.orderDetail.specs,
         "total":that.data.orderDetail.total,
-        // "marketprice":that.data.good.marketprice,
-        "marketprice":0.01,
+        "marketprice":that.data.good.marketprice,
+        // "marketprice":0.01,
         "address":that.data.address,
 
         "productprice":that.data.good.productprice,
