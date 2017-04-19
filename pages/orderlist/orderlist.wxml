@@ -1,192 +1,46 @@
 
 <!--pages/orderlist/orderlist.wxml-->
 <import src="/dist/tab/index.wxml" />
-<view class="container">
-  <swiper class="swiper" style="height:{{windowHeight}}px" autoplay="{{autoplay}}" circular="{{circular}}" duration="500" bindchange="swiperChange" current="{{selectedId}}">
+<import src="/tpl/ordertpl.wxml" />
 
+<view class="container">
+  <swiper class="swiper" style="height:100vh" autoplay="{{autoplay}}" circular="{{circular}}" duration="500" bindchange="swiperChange" current="{{selectedId}}">
     <view class="tab">
       <template is="zan-tab" data="{{tab: tab, componentId: 'tab'}}"></template>
     </view>
 
 
-    <swiper-item>
-    <scroll-view scroll-y="true" style="height:{{windowHeight}}px;">
-	<view style="margin-top: 55px;"></view>
-    <block wx:for="{{order}}">
-	<view class="zan-panel">
-	<view class="zan-cell panel-no-border">
-	<view class="zan-cell__hd" style="margin-right: 5px;"><view class="zan-icon zan-icon-store" style="font-size: 18px;"></view></view>
-	<view class="zan-cell__bd">eshandz商城</view>
-	</view>
-	<view class="zan-cell panel-no-border" style="background-color: #f9f9f9;">
-	<view class="zan-cell__hd" style="margin-right: 5px;background-color: #F9F9F9"><image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg" style="width: 150rpx;height:150rpx"></image></view>
-	<view  class="zan-cell__hd">
-	<view class="zan-font-16"><view class="zan-pull-left" style="width: 80%;">{{item.title}}</view><view class="zan-c-red zan-pull-right" style="width: 20%;text-align: right;">￥45</view></view>
-
-	<view class="zan-font-12 zan-c-gray-dark"><view class="zan-pull-left" style="width: 80% ">规格：{{item.option}}</view><view class="zan-pull-right" style="width: 20%;text-align: right;">*{{item.quantity}}</view></view>
-	</view>
-	</view>
-	<view class="zan-cell">
-	<view class="zan-cell__hd"></view>
-	<view class="zan-cell__bd zan-pull-right">合计：</view>
-	<view class="zan-cell__ft zan-c-red zan-font-18">￥{{item.total}}</view>
-	</view>
-	<view class="zan-cell">
-	<view class="zan-cell__hd"></view>
-	<view class="zan-cell__bd">
-	 <view class="zan-label zan-label--primary zan-label--middle zan-label--plain zan-pull-right">确认支付</view>
-	<view class="zan-label zan-label--middle zan-pull-right">取消订单</view>     
-	</view>
-	<view class="zan-cell__ft"></view>
-	</view>
-	</view>
-	</block>
-	</scroll-view>
-    </swiper-item>
+	<swiper-item height="100vh">        
+	<template is="orderlist" data="{{statusData:status0}}"></template>
+  </swiper-item>
     <!-- 全部结束 -->
 
-    <swiper-item>
-      <scroll-view scroll-y="true" style="height:{{windowHeight}}px;">
-	<view style="margin-top: 55px;"></view>
-    <block wx:for="{{order}}">
-	<view class="zan-panel">
-	<view class="zan-cell panel-no-border">
-	<view class="zan-cell__hd" style="margin-right: 5px;"><view class="zan-icon zan-icon-store" style="font-size: 18px;"></view></view>
-	<view class="zan-cell__bd">eshandz商城</view>
-	</view>
-	<view class="zan-cell panel-no-border" style="background-color: #f9f9f9;">
-	<view class="zan-cell__hd" style="margin-right: 5px;background-color: #F9F9F9"><image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg" style="width: 150rpx;height:150rpx"></image></view>
-	<view  class="zan-cell__hd">
-	<view class="zan-font-16"><view class="zan-pull-left" style="width: 80%;">{{item.title}}</view><view class="zan-c-red zan-pull-right" style="width: 20%;text-align: right;">￥45</view></view>
-
-	<view class="zan-font-12 zan-c-gray-dark"><view class="zan-pull-left" style="width: 80% ">规格：{{item.option}}</view><view class="zan-pull-right" style="width: 20%;text-align: right;">*{{item.quantity}}</view></view>
-	</view>
-	</view>
-	<view class="zan-cell">
-	<view class="zan-cell__hd"></view>
-	<view class="zan-cell__bd zan-pull-right">合计：</view>
-	<view class="zan-cell__ft zan-c-red zan-font-18">￥{{item.total}}</view>
-	</view>
-	<view class="zan-cell">
-	<view class="zan-cell__hd"></view>
-	<view class="zan-cell__bd">
-	 <view class="zan-label zan-label--primary zan-label--middle zan-label--plain zan-pull-right">确认支付</view>
-	<view class="zan-label zan-label--middle zan-pull-right">取消订单</view>     
-	</view>
-	<view class="zan-cell__ft"></view>
-	</view>
-	</view>
-	</block>
-	</scroll-view>
+	<swiper-item height="100vh">        
+	<template is="orderlist" data="{{statusData:status1}}"></template>
     </swiper-item>
     <!-- 待体验结束 -->
 
-    <swiper-item>
-       <scroll-view scroll-y="true" style="height:{{windowHeight}}px;">
-	<view style="margin-top: 55px;"></view>
-    <block wx:for="{{order}}">
-	<view class="zan-panel">
-	<view class="zan-cell panel-no-border">
-	<view class="zan-cell__hd" style="margin-right: 5px;"><view class="zan-icon zan-icon-store" style="font-size: 18px;"></view></view>
-	<view class="zan-cell__bd">eshandz商城</view>
-	</view>
-	<view class="zan-cell panel-no-border" style="background-color: #f9f9f9;">
-	<view class="zan-cell__hd" style="margin-right: 5px;background-color: #F9F9F9"><image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg" style="width: 150rpx;height:150rpx"></image></view>
-	<view  class="zan-cell__hd">
-	<view class="zan-font-16"><view class="zan-pull-left" style="width: 80%;">{{item.title}}</view><view class="zan-c-red zan-pull-right" style="width: 20%;text-align: right;">￥45</view></view>
-
-	<view class="zan-font-12 zan-c-gray-dark"><view class="zan-pull-left" style="width: 80% ">规格：{{item.option}}</view><view class="zan-pull-right" style="width: 20%;text-align: right;">*{{item.quantity}}</view></view>
-	</view>
-	</view>
-	<view class="zan-cell">
-	<view class="zan-cell__hd"></view>
-	<view class="zan-cell__bd zan-pull-right">合计：</view>
-	<view class="zan-cell__ft zan-c-red zan-font-18">￥{{item.total}}</view>
-	</view>
-	<view class="zan-cell">
-	<view class="zan-cell__hd"></view>
-	<view class="zan-cell__bd">
-	 <view class="zan-label zan-label--primary zan-label--middle zan-label--plain zan-pull-right">确认支付</view>
-	<view class="zan-label zan-label--middle zan-pull-right">取消订单</view>     
-	</view>
-	<view class="zan-cell__ft"></view>
-	</view>
-	</view>
-	</block>
-	</scroll-view>
+     <swiper-item height="100vh">        
+	<template is="orderlist" data="{{statusData:status2}}"></template>
     </swiper-item>
     <!-- 正在体验结束 -->
 
-    <swiper-item>
-      <scroll-view scroll-y="true" style="height:{{windowHeight}}px;">
-	<view style="margin-top: 55px;"></view>
-    <block wx:for="{{order}}">
-	<view class="zan-panel">
-	<view class="zan-cell panel-no-border">
-	<view class="zan-cell__hd" style="margin-right: 5px;"><view class="zan-icon zan-icon-store" style="font-size: 18px;"></view></view>
-	<view class="zan-cell__bd">eshandz商城</view>
-	</view>
-	<view class="zan-cell panel-no-border" style="background-color: #f9f9f9;">
-	<view class="zan-cell__hd" style="margin-right: 5px;background-color: #F9F9F9"><image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg" style="width: 150rpx;height:150rpx"></image></view>
-	<view  class="zan-cell__hd">
-	<view class="zan-font-16"><view class="zan-pull-left" style="width: 80%;">{{item.title}}</view><view class="zan-c-red zan-pull-right" style="width: 20%;text-align: right;">￥45</view></view>
-
-	<view class="zan-font-12 zan-c-gray-dark"><view class="zan-pull-left" style="width: 80% ">规格：{{item.option}}</view><view class="zan-pull-right" style="width: 20%;text-align: right;">*{{item.quantity}}</view></view>
-	</view>
-	</view>
-	<view class="zan-cell">
-	<view class="zan-cell__hd"></view>
-	<view class="zan-cell__bd zan-pull-right">合计：</view>
-	<view class="zan-cell__ft zan-c-red zan-font-18">￥{{item.total}}</view>
-	</view>
-	<view class="zan-cell">
-	<view class="zan-cell__hd"></view>
-	<view class="zan-cell__bd">
-	 <view class="zan-label zan-label--primary zan-label--middle zan-label--plain zan-pull-right">确认支付</view>
-	<view class="zan-label zan-label--middle zan-pull-right">取消订单</view>     
-	</view>
-	<view class="zan-cell__ft"></view>
-	</view>
-	</view>
-	</block>
-	</scroll-view>
+    <swiper-item height="100vh">        
+	<template is="orderlist" data="{{statusData:status3}}"></template>
     </swiper-item>
     <!-- 已经体验结束 -->
 
-    <swiper-item>
-      <scroll-view scroll-y="true" style="height:{{windowHeight}}px;">
-	<view style="margin-top: 55px;"></view>
-    <block wx:for="{{order}}">
-	<view class="zan-panel">
-	<view class="zan-cell panel-no-border">
-	<view class="zan-cell__hd" style="margin-right: 5px;"><view class="zan-icon zan-icon-store" style="font-size: 18px;"></view></view>
-	<view class="zan-cell__bd">eshandz商城</view>
-	</view>
-	<view class="zan-cell panel-no-border" style="background-color: #f9f9f9;">
-	<view class="zan-cell__hd" style="margin-right: 5px;background-color: #F9F9F9"><image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg" style="width: 150rpx;height:150rpx"></image></view>
-	<view  class="zan-cell__hd">
-	<view class="zan-font-16"><view class="zan-pull-left" style="width: 80%;">{{item.title}}</view><view class="zan-c-red zan-pull-right" style="width: 20%;text-align: right;">￥45</view></view>
-
-	<view class="zan-font-12 zan-c-gray-dark"><view class="zan-pull-left" style="width: 80% ">规格：{{item.option}}</view><view class="zan-pull-right" style="width: 20%;text-align: right;">*{{item.quantity}}</view></view>
-	</view>
-	</view>
-	<view class="zan-cell">
-	<view class="zan-cell__hd"></view>
-	<view class="zan-cell__bd zan-pull-right">合计：</view>
-	<view class="zan-cell__ft zan-c-red zan-font-18">￥{{item.total}}</view>
-	</view>
-	<view class="zan-cell">
-	<view class="zan-cell__hd"></view>
-	<view class="zan-cell__bd">
-	 <view class="zan-label zan-label--primary zan-label--middle zan-label--plain zan-pull-right">确认支付</view>
-	<view class="zan-label zan-label--middle zan-pull-right">取消订单</view>     
-	</view>
-	<view class="zan-cell__ft"></view>
-	</view>
-	</view>
-	</block>
-	</scroll-view>
+    <swiper-item height="100vh">        
+	<template is="orderlist" data="{{statusData:status4}}"></template>
     </swiper-item>
     <!-- 已经付款结束 -->
+  <view class="loading_box" hidden="{{loadbox}}">
+   <view class="pulse pulse_1"></view>
+   <view class="pulse pulse_2"></view>
+   <view class="pulse pulse_3"></view>
+   <view class="pulse pulse_4"></view>
+   </view>
+
+
   </swiper>
 </view>

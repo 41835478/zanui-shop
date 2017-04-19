@@ -6,7 +6,8 @@ Page({
     bgimg:null,
     windowHeight:null,
     goodsindex:[],
-    goodsid:null
+    goodsid:null,
+    loadbox:false
   },
 
   //事件处理函数 
@@ -14,11 +15,11 @@ Page({
     var that = this;
     that.setData({ windowHeight:app.globalData.windowHeight})//设置滚动区域全屏 
       wx.request({
-        url: 'https://api.eshandz.cn/api/index/index',
+        url: 'https://api.eshandz.cn/api/index/getRandGoods',
         data: { p: 1, appid:app.globalData.appid, token:app.globalData.token},
         method: 'get',
         success: function (res) {        
-        console.log(res);
+        // console.log(res);
             switch(res.data.code)
                 {
                 case 200: 
@@ -27,7 +28,10 @@ Page({
                     bgimg:res.data.data[0].thumb,
                     goodsindex: that.data.goodsindex.concat(res.data.data),  
                     goodsid:res.data.data[0].id,            
-                  });             
+                  });
+                  that.setData({
+                    loadbox:true,
+                  })           
                   break;
                 case 201:
                   if(that.data.nomore){
@@ -36,7 +40,7 @@ Page({
                   break;
                   case 400:
                   console.log("商品区加载token验证失败再次请求")
-                  that.onLoad()
+                  app.onLaunch()
                   break;
                 default:             
                 }       
@@ -61,7 +65,7 @@ Page({
    onShareAppMessage: function () {
     return {
       title: 'e衫订制商城',
-      path: '/page/index',
+      path: '/pages/index/index',
       success: function(res) {
         // 分享成功
       },
@@ -69,8 +73,6 @@ Page({
         // 分享失败
       }
     }
-  },
-  onShow: function () {
   },
 
 })

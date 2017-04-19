@@ -1,0 +1,121 @@
+<!--pages/orderdetail/orderdetail.wxml-->
+<!--pages/order/order.wxml-->
+<import src="/dist/switch/index.wxml" />
+<import src="/dist/steps/index.wxml" />
+<view class="container">
+
+  <view class="zan-panel" style="margin-top: 0px;position: relative;">
+  	<view class="zan-cell panel-no-border">	
+	<view class="zan-cell__hd" style="margin-right: 5px;"><view class="zan-icon zan-icon-sign" style="font-size:12px;"></view></view>
+	<view class="zan-cell__bd zan-font-12">订单状态</view>
+	</view>
+<!--     <view class="zan-cell">
+      <view class="zan-cell__bd">
+        <template is="zan-steps" data="{{ type: 'horizon', steps: steps }}"></template>
+      </view>
+    </view> -->
+	<view style="position: absolute;top:5px;right:15px;text-align: right;">
+		<text class="zan-c-red zan-font-12" wx:if="{{detail.status==-1}}">支付失败</text>
+		<text class="zan-c-red zan-font-12" wx:if="{{detail.status==0}}">支付成功，配送中</text>
+		<text class="zan-c-red zan-font-12" wx:if="{{detail.status==1}}">待支付，正安排配送</text>
+		<text class="zan-c-red zan-font-12" wx:if="{{detail.status==2}}">待支付，体验中</text>
+		<text class="zan-c-red zan-font-12" wx:if="{{detail.status==3}}">支付成功，订单完成</text>
+	</view>
+	<view class="zan-cell">
+	 <view class="zan-cell__hd"></view>
+      <view class="zan-cell__bd"></view>
+      <view class="zan-cell__ft zan-font-12 zan-c-red">{{clock}}</view>
+    </view>
+  </view>
+
+
+	<view class="zan-panel">
+	<view class="zan-cell">	
+		<view class="zan-cell__hd" style="margin-right: 5px;"><view class="zan-icon zan-icon-location" style="font-size: 18px;"></view></view>
+		<block wx:if="{{detail.address}}">
+		<view class="zan-cell__bd">
+		<view class="zan-pull-up zan-font-16">收货人：{{detail.address.realname}}<text class="zan-pull-right">{{detail.address.mobile}}</text></view>
+		<view class="zan-font-12 zan-c-gray-dark">收货地址： {{detail.address.province}} {{detail.address.city}} {{detail.address.area}} {{detail.address.address}}</view>
+		</view>
+		<view class="zan-cell__ft"></view>
+		</block>
+		<block wx:else>
+		<view class="zan-cell__bd">请选择地址</view>
+		<view class="zan-cell__ft"></view>	
+		</block>
+
+	</view>
+	</view>
+
+	<!-- 收货地址结束 -->
+	<view class="zan-panel">
+	<view class="zan-cell panel-no-border" style="padding: 5px 15px;position: relative;">	
+	<view class="zan-cell__hd" style="margin-right: 5px;"><view class="zan-icon zan-icon-store" style="font-size: 18px;"></view></view>
+	<view class="zan-cell__bd">订单编号：</view>
+	<view class="zan-cell__ft">{{detail.ordersn}}</view>
+	<view class="zan-font-12 zan-c-gray-dark"></view>
+	</view>
+	
+	<block wx:for="{{detail.goods}}">
+	<view class="zan-cell" style="background-color: #f9f9f9;">
+	<view class="zan-cell__hd" style="margin-right:10px;background-color: #F9F9F9;"><image src="{{item.thumb}}" style="width:50px;height:50px"></image></view>
+	<view style="position: relative;width:50vh ">
+	<view class="zan-pull-left zan-ellipsis--12" style="width:35vh;">{{item.title}}</view><view class="zan-c-red" style="position:absolute;top: 2rxp;right: 0rpx;width: 10vh;text-align: right">￥{{item.price}}</view>	
+
+	<view class="zan-font-12 zan-c-gray-dark"><view class="zan-pull-left" style="width: 30vh;">规格：{{item.optionname}}</view><view class="zan-pull-right" style="width:10vh;text-align: right">×{{item.total}}</view></view>
+	</view>
+	</view>
+	</block>
+
+	<view class="zan-cell">
+	<view class="zan-cell__hd zan-font-12" style="margin-right: 5px;">配送方式</view>
+	<view class="zan-cell__bd"></view>
+	<view class="zan-cell__ft zan-c-gray-dark zan-font-12">{{detail.expresssn}}</view>
+	</view>
+
+	<view class="zan-cell">
+	<view class="zan-cell__hd zan-font-12" style="width: 200rpx">备注信息</view>
+	<view class="zan-cell__bd">{{detail.remark}}</view>
+	</view>
+
+
+
+	<view class="zan-cell">
+	<view class="zan-cell__hd zan-font-12" style="margin-right: 5px;">合计</view>
+	<view class="zan-cell__bd"></view>
+	<view class="zan-cell__ft zan-c-red zan-font-12">￥{{detail.goodsprice}}</view>
+	</view>
+	<view class="zan-cell">
+	<view class="zan-cell__hd zan-font-12" style="margin-right: 5px;">下单时间</view>
+	<view class="zan-cell__bd"></view>
+	<view class="zan-cell__ft zan-font-12">{{detail.createtime}}</view>
+	</view>
+
+	</view>
+	<!-- 商品详情结束 -->
+	<view class="zan-panel">
+	<view class="panel-no-border zan-cell zan-font-12">
+	<view class="zan-cell__bd">商品金额</view><view class="zan-cell__ft">￥{{detail.goodsprice}}</view>	
+	</view>
+	<view class="panel-no-border zan-cell zan-font-12">
+	<view class="zan-cell__bd">运费</view><view class="zan-cell__ft">+￥0</view>	
+	</view>
+	</view>
+	<!-- 费用介绍结束 -->
+	<view class="zan-panel btn-container" style="width: 100%">
+	<view class="tongji-btn zan-pull-left">合计：<text class="zan-c-red">￥{{detail.goodsprice}}</text></view>
+    <button class="zan-btn zan-btn--large zan-btn--danger zan-pull-right" style="width: 40%" bindtap="orderPay"><text wx:if="{{ detail.status ==-1|| detail.status ==2}}">支付</text><text wx:if="{{ detail.status ==1|| detail.status ==3}}">关闭订单</text></button>
+	</view>
+
+
+	<view class="loading_box" hidden="{{loadbox}}">
+ 	 <view class="pulse pulse_1"></view>
+ 	 <view class="pulse pulse_2"></view>
+ 	 <view class="pulse pulse_3"></view>
+ 	 <view class="pulse pulse_4"></view>
+	</view>
+
+
+
+</view>
+

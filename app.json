@@ -1,11 +1,14 @@
 {
-  "pages": [
-    "pages/index/index",
+  "pages": [  
+    
+    "pages/notice/notice", 
+     "pages/index/index",    
     "pages/member/member",
     "pages/cate/cate",
     "pages/order/order",
     "pages/detail/detail",
     "pages/orderlist/orderlist",
+  "pages/orderdetail/orderdetail", 
     "pages/good/good"
   ],
   "window": {

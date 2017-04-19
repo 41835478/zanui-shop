@@ -5,4 +5,5 @@
     <view class="zan-c-black zan-ellipsis">{{item.title}}</view><view class="zan-c-gray-dark">来自e衫订制</view>       
     </view>
     </navigator>
-  </template>
+</template>
+

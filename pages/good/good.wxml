@@ -1,7 +1,7 @@
 <!--pages/good/good.wxml-->
 <import src="/dist/loadmore/index.wxml" />
-<view class="container" style="height: 100%">
-  <scroll-view scroll-y="true" style="height:100%" bindscrolltolower="loadMoreGoods">
+<view class="container" style="height: 100vh;margin:0px 10px">
+  <scroll-view scroll-y="true" style="height:100vh" bindscrolltolower="loadMoreGoods">
   <block wx:for="{{goods}}">
     <navigator url="../../pages/detail/detail?goodsid={{item.id}}" hover-class="none">
     <view class="goods">

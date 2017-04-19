@@ -13,11 +13,13 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     // console.log(options)
+    wx.setNavigationBarTitle({
+      title: options['catename']+'-e衫订制'
+    })
     p = 1
     var that = this
     that.setData({
-      selectedId: options['cateid'],
-      windowHeight: wx.getStorageSync('windowHeight')+45
+      selectedId: options['cateid']
     })
     that.loadMoreGoods(options['cateid'])
     

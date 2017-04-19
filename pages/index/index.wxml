@@ -1,12 +1,15 @@
 <!--index.wxml-->
- <navigator url="../../pages/detail/detail?goodsid={{goodsid}}" hover-class="none" style="height: 100%;  touch-action:pan-x;">
-<view class="bgcover" style="height:100%"></view>
-<image class="bgimg" src="{{bgimg}}" style="width: 100%;max-height:100%" mode="widthFix"></image>   
+<view class="container">
+<scroll-view>
+ <navigator url="../../pages/detail/detail?goodsid={{goodsid}}" hover-class="none">
+ <view class="name"><text>e衫订制</text></view>
+<view class="bgcover"></view>
+<image class="bgimg" src="{{bgimg}}" mode="widthFix"></image>   
 
-        <swiper  style="height:100%"   bindchange="swiperChange">
+        <swiper  style="height:90vh" bindchange="swiperChange">
           <swiper-item  wx:for="{{goodsindex}}">
           <view class="item-box">            
-            <image src="{{item.thumb}}"></image>
+            <image src="{{item.thumb}}" mode="widthFix"></image>
             <view class="text-area">
                 <view class="zan-c-gray-dark">{{item.title}}</view>
                 <view class="zan-c-red">￥{{item.marketprice}}</view>              
@@ -15,3 +18,13 @@
           </swiper-item>
         </swiper>
 </navigator>
+
+<view class="loading_box" hidden="{{loadbox}}">
+  <view class="pulse pulse_1"></view>
+  <view class="pulse pulse_2"></view>
+  <view class="pulse pulse_3"></view>
+  <view class="pulse pulse_4"></view>
+</view>
+
+</scroll-view>
+</view>

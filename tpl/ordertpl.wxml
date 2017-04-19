@@ -1,0 +1,63 @@
+<import src="/tpl/copyrighttpl.wxml"/>
+<template name="orderlist" style="height: 100vh">
+	<scroll-view scroll-y="true" style="height:100vh;">
+	<view style="margin-top: 55px;"></view>
+    <block wx:for="{{statusData}}">
+	<view class="zan-panel">
+	<navigator url="../../pages/orderdetail/orderdetail?orderid={{item.id}}" hover-class="none">	
+	<view class="panel-no-border" style="padding: 5px 15px;position: relative;">
+	<view>
+	<view class="zan-icon zan-icon-store" style="font-size: 18px;margin-right:10px;margin-bottom: 5px"></view>
+	<text>e衫订制商城</text>
+	</view>
+
+	<view class="zan-font-12 zan-c-gray-dark">订单编号：{{item.ordersn}}</view>
+	<view style="position: absolute;top:5px;right:15px;text-align: right;">
+		<text class="zan-c-red zan-font-12" wx:if="{{item.status==-1}}">支付失败</text>
+		<text class="zan-c-red zan-font-12" wx:if="{{item.status==0}}">支付成功，配送中</text>
+		<text class="zan-c-red zan-font-12" wx:if="{{item.status==1}}">待支付，正安排配送</text>
+		<text class="zan-c-red zan-font-12" wx:if="{{item.status==2}}">待支付，体验中</text>
+		<text class="zan-c-red zan-font-12" wx:if="{{item.status==3}}">支付成功，订单完成</text>
+	</view>
+	</view>
+	<!-- <block wx:for="{{item.listone}}"> -->
+	<view class="zan-cell" style="background-color: #f9f9f9;">
+	<view class="zan-cell__hd" style="margin-right:10px;background-color: #F9F9F9;"><image src="{{item.listone.thumb}}" style="width:50px;height:50px"></image></view>
+	<view style="position: relative;width:50vh ">
+	<view class="zan-pull-left zan-ellipsis--12" style="width:35vh;">{{item.listone.title}}</view><view class="zan-c-red" style="position:absolute;top: 2rxp;right: 0rpx;width: 10vh;text-align: right">￥{{item.listone.price}}</view>	
+
+	<view class="zan-font-12 zan-c-gray-dark"><view class="zan-pull-left" style="width: 30vh;">规格：{{item.listone.optionname}}</view><view class="zan-pull-right" style="width:10vh;text-align: right">×{{item.listone.total}}</view></view>
+	</view>
+	</view>
+	</navigator>
+	
+	<!-- </block> -->
+	<view class="zan-cell zan-font-12">
+	<view class="zan-cell__hd"></view>
+	<view class="zan-cell__bd"></view>
+	<view class="zan-cell__ft zan-font-12">合计：<text class="zan-c-red">￥{{item.goodsprice}}</text></view>
+	</view>
+	<view class="zan-cell">
+	<view class="zan-cell__hd"></view>
+	<view class="zan-cell__bd">
+	<block wx:if="{{item.status!=3}}">
+	<view class="zan-label zan-label--{{item.status==2||item.status==0?'disabled':''}} zan-label--middle zan-label--plain zan-pull-right" data-orderid="{{item.id}}"  bindtap="{{item.status==2||item.status==0?'':'closeOrder'}}">关闭订单</view>
+	</block>
+	<block wx:if="{{item.status==0}}">
+	 <view class="zan-label zan-label--primary zan-label--middle zan-label--plain zan-pull-right" data-orderid="{{item.id}}" bindtap="confirmOrder">确认收货</view>
+	 </block>
+	 <block wx:if="{{!(item.status==0||item.status==3)}}">
+	 <view class="zan-label zan-label--primary zan-label--middle zan-label--plain zan-pull-right" data-orderid="{{item.id}}" data-body="{{item.listone.title}} {{item.listone.optionname}}" bindtap="payOrder">去支付</view>
+	 </block>
+	 <block wx:if="{{item.status==3}}">
+	 <view class="zan-label zan-label--middle zan-label--plain zan-pull-right">完成订单</view>
+	 </block>
+	 <!-- <view class="zan-label zan-label--middle zan-pull-right" bindtap="">取消订单</view>      -->
+	</view>
+	<view class="zan-cell__ft"></view>
+	</view>
+	</view>
+	</block>
+	<template is="copyright"></template>
+	</scroll-view>
+</template>

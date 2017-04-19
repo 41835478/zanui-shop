@@ -2,7 +2,8 @@
 var app = getApp();
 Page({
   data:{
-    category:[]
+    category:[],
+    loadbox:false
   },
 
     loadcategory: function () {
@@ -19,6 +20,10 @@ Page({
                 var tab = [{ id: '0', title: '全部',advimg:'http://ohy7djn2s.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.png' }]
                 var data = tab.concat(res.data.data)
                 that.setData({ category: data })
+                    that.setData({
+                      loadbox:true
+                    })
+
                   break;
                 case 201:
                   if(that.data.nomore){
@@ -43,19 +48,6 @@ Page({
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     var that=this
-    that.loadcategory()
-
+    that.loadcategory();
   },
-  onReady:function(){
-    // 页面渲染完成
-  },
-  onShow:function(){
-    // 页面显示
-  },
-  onHide:function(){
-    // 页面隐藏
-  },
-  onUnload:function(){
-    // 页面关闭
-  }
 })

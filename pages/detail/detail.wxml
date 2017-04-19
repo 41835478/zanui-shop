@@ -30,10 +30,10 @@
       <view class="zan-cell__bd zan-c-gray-dark">运费：￥0</view>
       <view class="zan-cell__ft zan-c-gray-dark">剩余：{{good.sales}}</view>
     </view>
-    <view class="zan-cell zan-cell--access">
+    <view class="zan-cell zan-cell--access" bindtap="needNotcie">
       <view class="zan-cell__bd zan-font-12">
-        <view class="zan-label zan-label--primary zan-label--small zan-label--plain">满减</view>
-        <view class="zan-label zan-label--primary zan-label--small zan-label--plain">免邮</view>满90元减5元
+        <view class="zan-label zan-label--primary zan-label--small zan-label--plain">体验须知</view>
+        <view class="zan-label zan-label--primary zan-label--small zan-label--plain">购买须知</view>免费体验，送货上门
       </view>
       <view class="zan-cell__ft"></view>
     </view>
@@ -65,11 +65,11 @@
   <!-- 商品详情结束 -->
   <view class="zan-panel btn-container" style="width: 100%">
     <button bindtap="tohome" class="zan-btn zan-btn--large btn-flex-item" style="width: 20%;border-right: 1px solid #F0F0F0">
-      <view class="zan-icon zan-icon-home" style="font-size: 16px;display: block;"></view>首页</button>
+      <view class="zan-icon zan-icon-home" style="font-size: 16px;display: block;" bindtap="backIndex"></view>首页</button>
     <button bindtap="totiyan" class="zan-btn zan-btn--large btn-flex-item" style="width: 20%">
       <view class="zan-icon zan-icon-store" style="font-size: 16;display: block;"></view>体验包</button>
-    <button class="zan-btn zan-btn--large zan-btn--warn btn-flex-item" style="width:30%" bindtap="toggleDialog" data-actionid="1">立即体验</button>
-    <button class="zan-btn zan-btn--large zan-btn--danger btn-flex-item" style="width: 30%" bindtap="toggleDialog" data-actionid="2">立即购买</button>
+    <button class="zan-btn zan-btn--large zan-btn--warn btn-flex-item" style="width:30%" bindtap="toggleDialog" data-actionid="experience">立即体验</button>
+    <button class="zan-btn zan-btn--large zan-btn--danger btn-flex-item" style="width: 30%" bindtap="toggleDialog" data-actionid="normal">立即购买</button>
   </view>
 
   <!-- 按钮组结束 -->
@@ -89,7 +89,7 @@
           <view class="panel-no-border zan-cell">
             <view class="dialog_option">{{item.title}}：
               <block wx:for="{{item.content}}">
-                <text class="zan-label {{ chooseOptionId[i] == item.id ? 'zan-label--primary' : '' }}" id="{{item.id}}" data-option="{{i}}" data-chooseoptionthumb="{{item.thumb}}" bindtap="chooseOptionId">{{item.name}} </text>
+                <text class="option-margin zan-label {{ chooseOptionId[i] == item.id ? 'zan-label--primary' : '' }}" id="{{item.id}}" data-option="{{i}}" data-chooseoptionthumb="{{item.thumb}}" bindtap="chooseOptionId">{{item.name}} </text>
               </block>
             </view>
           </view>
@@ -104,5 +104,12 @@
   </view>
 
   <!-- 提交弹窗结束 -->
+
+  <view class="loading_box" hidden="{{loadbox}}">
+  <view class="pulse pulse_1"></view>
+  <view class="pulse pulse_2"></view>
+  <view class="pulse pulse_3"></view>
+  <view class="pulse pulse_4"></view>
+</view>
 
 </view>

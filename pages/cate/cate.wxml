@@ -1,12 +1,28 @@
 <!--pages/cate/cate.wxml-->
+<import src="/tpl/copyrighttpl.wxml"/>
 <view class="container">
-	<block wx:for="{{category}}">
-	<navigator url="../../pages/good/good?cateid={{item.id}}">
+<scroll-view>
+	<view class="zan-panel" style="margin-top: 0px;">
+	<block wx:for="{{category}}">	
+	<navigator url="../../pages/good/good?cateid={{item.id}}&catename={{item.title}}">
 		<view class="zan-cell zan-cell--access">
 		<view class="zan-cell__hd"><image src="{{item.advimg}}"></image></view>	
-			<view class="zan-cell__bd">{{item.title}}</view>
+			<view class="zan-cell__bd"  style="margin-left: 100rpx;">{{item.title}}</view>
 			<view class="zan-cell__ft"></view>
 		</view>
+		
 		</navigator>
 	</block>
+	</view>
+	
+
+	<template is="copyright"></template>
+
+	<view class="loading_box" hidden="{{loadbox}}">
+ 	 <view class="pulse pulse_1"></view>
+ 	 <view class="pulse pulse_2"></view>
+ 	 <view class="pulse pulse_3"></view>
+ 	 <view class="pulse pulse_4"></view>
+	</view>
+</scroll-view>
 </view>

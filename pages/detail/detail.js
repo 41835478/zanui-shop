@@ -19,8 +19,28 @@ Page(Object.assign({}, Zan.Quantity,Zan.TopTips,{
       1:false
     },
     chooseoptionthumb:'',
-    swiperCurrent: 0
+    swiperCurrent: 0,
+    loadbox:false,
   
+  },
+  backIndex:function(){
+    wx.switchTab({
+      url: '../../pages/index/index'
+    })
+  },
+  needNotcie:function(){
+    wx.showModal({
+      title: '用户须知',
+      content: '选择体验下单，无须支付，送货上门试穿后支付；目前仅仅支持江大范围',
+      showCancel:false,
+      success: function(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   },
 
   swiperChange:function(e){
@@ -83,7 +103,7 @@ Page(Object.assign({}, Zan.Quantity,Zan.TopTips,{
     var that=this;
     var actionid=this.data.actionid;
     var goodsid=this.data.good.id;
-    var quantity=this.data.quantity1.quantity;
+    var total=this.data.quantity1.quantity;
     var thumb=this.data.chooseoptionthumb;
     var specs=this.data.chooseOptionId[0]+"_"+this.data.chooseOptionId[1];
     // console.log(thumb);
@@ -96,7 +116,7 @@ Page(Object.assign({}, Zan.Quantity,Zan.TopTips,{
       return false;
     }
     wx.navigateTo({
-      url: '../../pages/order/order?goodsid='+goodsid+'&quantity='+quantity+'&actionid='+actionid+'&specs='+specs+'&thumb='+thumb
+      url: '../../pages/order/order?goodsid='+goodsid+'&total='+total+'&actionid='+actionid+'&specs='+specs+'&thumb='+thumb
     })
 
   },
@@ -116,31 +136,12 @@ Page(Object.assign({}, Zan.Quantity,Zan.TopTips,{
       success:function(res){
         // console.log(res); 
         that.setData({slider:res.data.data.thumb_url,good:res.data.data,chooseoptionthumb:res.data.data.thumb})     
+        that.setData({
+          loadbox:true
+        })
       },
       fail:function(){},
       complete:function(){}
     })
   },
-
-
-
-  onReady:function(){
-    // 页面渲染完成
-  },
-  onPullDownRefresh:function(e){
-    console.log('下拉'+e)
-  },
-  onPullDownRefresh: function() {
-    // Do something when pull down.
-     console.log('onPullDownRefresh'+e)
-  },
-  onShow:function(){
-    // 页面显示
-  },
-  onHide:function(){
-    // 页面隐藏
-  },
-  onUnload:function(){
-    // 页面关闭
-  }
 }))

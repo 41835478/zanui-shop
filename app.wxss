@@ -1,5 +1,6 @@
 /**app.wxss**/
 @import "dist/index.wxss";
+@import "iconfont/iconfont.wxss";
 page{
 	background-color: #F9F9F9;
 }
@@ -9,3 +10,118 @@ page{
 	border-bottom: 0;
 
 }
+
+
+.loading_box {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  padding: 100rpx 0;
+}
+.loading_box>view {
+  display: inline-block;
+}
+@keyframes loading {
+  0% {
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate3d(0, 0, 1, 360deg);
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
+
+/*加载条开始*/
+
+.pulse {
+  /*position: absolute;*/
+  width: 8rpx;
+  height: 40rpx;
+  background: #1ab394;
+  margin: 8rpx;
+  border-radius: 20rpx;
+  z-index: 100;
+  margin-top:400rpx; 
+
+}
+
+.pulse_1 {
+  -webkit-animation: pulse 0.5s linear infinite alternate;
+  animation: pulse 0.5s linear infinite alternate;
+}
+
+.pulse_2 {
+  -webkit-animation: pulse 0.5s linear infinite alternate;
+  animation: pulse 0.5s linear infinite alternate;
+  animation-delay: 0.1s;
+}
+
+.pulse_3 {
+  -webkit-animation: pulse 0.5s linear infinite alternate;
+  animation: pulse 0.5s linear infinite alternate;
+  animation-delay: 0.2s;
+}
+
+.pulse_4 {
+  -webkit-animation: pulse 0.5s linear infinite alternate;
+  animation: pulse 0.5s linear infinite alternate;
+  animation-delay: 0.3s;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0);
+  }
+}
+/*加载条结束*/
+
+/*copyright*/
+.copyright{
+  /*width: 100vh;*/
+  color:#cdcdcd;
+  font-family: 'STHeiti';
+  /*position: absolute;*/
+  margin:50rpx 0rpx;
+  display:flex;
+  display: -webkit-flex; /* Safari */
+  flex-direction:column;
+  /*justify-content: center;*/
+  align-items: flex-end;
+  align-items:center;
+  width: 100%;
+}
+.copyright-logo{
+  display: flex;
+  display: -webkit-flex;  /*Safari */
+  flex-direction:row; 
+
+}
+.copyright-logo text{
+    margin-left: 10rpx; 
+    height: 50rpx;
+    line-height:50rpx;
+}
+.copyright-title{
+  margin-top: 10rpx;
+  font-family: 'KaiTi';
+  font-size: 16px;
+
+}
+/*copyright结束*/

@@ -1,10 +1,8 @@
 <template name="zan-loadmore">
 
   <block wx:if="{{nomore}}">
-    <view class="zan-loadmore zan-loadmore--nomore">
-      <view class="zan-loadmore__tips">
-        <view class="zan-loadmore__dot"></view>
-      </view>
+    <view class="zan-loadmore zan-loadmore--nodata" style="margin-top:100rpx;margin-bottom: 100rpx">
+      <view class="zan-loadmore__tips">{{ nodata_str || '没有更多数据了' }}</view>
     </view>
   </block>
 

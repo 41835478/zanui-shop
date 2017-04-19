@@ -1,4 +1,5 @@
-/* pages/order/order.wxss */
+/* pages/orderdetail/orderdetail.wxss */
+
 .container{
 	padding-bottom: 60px; 
 }
@@ -21,3 +22,10 @@
 .btn-on{
 	background-color: #C7C7C7;
 } 
+
+.my-class {
+  padding: 10px;
+}
+.my-class .zan-steps__step--done {
+  color: #f44;
+}

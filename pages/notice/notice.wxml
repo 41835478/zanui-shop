@@ -1,0 +1,9 @@
+<!--pages/notice/notice.wxml-->
+<view class="container">
+<scroll-view>
+<image class="imgIndex" style="width: {{windowWidth}}px;height:{{windowHeight}}px" src="http://ohy7djn2s.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20170417201809.png"></image>
+
+<text class="enterIndex" bindtap="enterIndex"></text>
+</scroll-view>
+</view>
+

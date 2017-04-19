@@ -1,22 +1,20 @@
 /* pages/cate/cate.wxss */
 page{
-	background-color: #fff
+	background-color: #fff;
+	height:100vh;
 }
 .container{
-	margin:10px 10px;
-	flex-wrap:wrap;
+	height: 100vh;
 }
-.box{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	-webkit-box-flex: 1;
-     -webkit-flex: 1;
-     flex: 1;
+scroll-view{
+	height: 100vh;
+}
 
-}
 .zan-cell__hd image{
 	border-radius: 50%;
-	width:200rpx;
-	height:200rpx;
+	width:100rpx;
+	height:100rpx;
+}
+.zan-cell{
+  border-top: 1rpx solid #e5e5e5;
 }

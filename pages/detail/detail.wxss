@@ -88,6 +88,9 @@ page{
 .dialog_option{
 	display: block;
 }
+.option-margin{
+	margin-bottom:20rpx;
+}
 .zan-toast {
   position: fixed;
   top: 35%;
