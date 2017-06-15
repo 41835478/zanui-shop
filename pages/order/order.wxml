@@ -24,19 +24,23 @@
 	</view>
 		</view>
 	<!-- 收货地址结束 -->
+	<form report-submit bindsubmit="orderPay">
 	<view class="zan-panel">
 	<view class="zan-cell panel-no-border">
 	<view class="zan-cell__hd" style="margin-right: 5px;"><view class="zan-icon zan-icon-store" style="font-size: 18px;"></view></view>
 	<view class="zan-cell__bd">e衫商城</view>
 	</view>
+
 	<view class="zan-cell panel-no-border" style="background-color: #f9f9f9;">
 	<view class="zan-cell__hd" style="margin-right:10px;background-color: #F9F9F9;"><image src="{{chooseoptionthumb}}" style="width:50px;height:50px"></image></view>
-	<view  class="zan-cell__hd">
-	<view class="zan-font-16"><view class="zan-pull-left" style="width: 70%;">{{good.title}}</view><view class="zan-c-red zan-pull-right" style="width: 20%;text-align: right;">￥{{good.marketprice}}</view></view>
+	<view style="position: relative;width:50vh ">
+	<view class="zan-pull-left zan-ellipsis--12" style="width:35vh;">{{good.title}}</view><view class="zan-c-red" style="position:absolute;top: 2rxp;right: 0rpx;width: 10vh;text-align: right">￥{{good.marketprice}}</view>	
 
-	<view class="zan-font-12 zan-c-gray-dark"><view class="zan-pull-left" style="width: 70% ">规格：{{spec}}</view><view class="zan-pull-right" style="width: 20%;text-align: right;">×{{total}}</view></view>
+	<view class="zan-font-12 zan-c-gray-dark"><view class="zan-pull-left" style="width: 30vh;">规格：{{spec}}</view><view class="zan-pull-right" style="width:10vh;text-align: right">×{{total}}</view></view>
 	</view>
 	</view>
+
+
 
 	<view class="zan-cell">
 	<view class="zan-cell__hd zan-font-12" style="margin-right: 5px;">配送方式</view>
@@ -50,9 +54,9 @@
 	</view>
 	<view class="zan-cell">
 	<view class="zan-cell__hd zan-font-12" style="margin-right: 100rpx;">体验</view>
-	<picker mode="date" value="{{dateValue}}" style="width:20vh" start="{{currentTime}}" end="2999-12-12" bindchange="datePickerBindchange"><text hidden="{{dateValue}}">日期选择:</text> {{dateValue}}
+	<picker mode="date" value="{{dateValue}}" style="width:20vh" start="{{currentTime}}" end="2999-12-12" bindchange="datePickerBindchange" name="chooseDate"><text hidden="{{dateValue}}">日期选择:</text> {{dateValue}}
 	</picker>
-	<picker value="{{index}}" range="{{array}}" style="width:20vh" bindchange="bindPickerChange"><text hidden="{{array[index]}}">时间选择: </text>
+	<picker value="{{index}}" range="{{array}}" style="width:20vh" bindchange="bindPickerChange" name="chooseTime"><text hidden="{{array[index]}}">时间选择: </text>
    {{array[index]}}
 	</picker>
 	</view>
@@ -60,7 +64,7 @@
 	<view class="zan-cell">
 	<view class="zan-cell__hd zan-font-12" style="margin-right: 5px;">合计</view>
 	<view class="zan-cell__bd"></view>
-	<view class="zan-cell__ft zan-c-red zan-font-12">￥{{good.marketprice * total}}</view>
+	<view class="zan-cell__ft zan-c-red zan-font-12">￥{{priceAll}}</view>
 	</view>
 
 	</view>
@@ -83,26 +87,17 @@
 	<!-- 开启通知结束 -->
 	<view class="zan-panel">
 	<view class="panel-no-border zan-cell zan-font-12">
-	<view class="zan-cell__bd">商品金额</view><view class="zan-cell__ft">￥{{good.marketprice * total}}</view>	
+	<view class="zan-cell__bd">商品金额</view><view class="zan-cell__ft">￥{{priceAll}}</view>	
 	</view>
 	<view class="panel-no-border zan-cell zan-font-12">
 	<view class="zan-cell__bd">运费</view><view class="zan-cell__ft">+￥0</view>	
 	</view>
 	</view>
 	<!-- 费用介绍结束 -->
+	
 	<view class="zan-panel btn-container" style="width: 100%">
-	<view class="tongji-btn zan-pull-left">合计：<text class="zan-c-red">￥{{good.marketprice * total}}</text></view>
-    <button class="zan-btn zan-btn--large zan-btn--danger zan-pull-right {{click=='on'?'': 'btn-on'}}" style="width: 40%" bindtap="orderPay">提交<text wx:if="{{ actionId =='experience' }}">体验</text><text wx:else>订单</text></button>
+	<view class="tongji-btn zan-pull-left">合计：<text class="zan-c-red">￥{{priceAll}}</text></view>
+    <button class="zan-btn zan-btn--large zan-btn--danger zan-pull-right {{click=='on'?'': 'btn-on'}}" style="width: 40%" formType="submit">提交<text wx:if="{{ actionId =='experience' }}">体验</text><text wx:else>订单</text></button>
 	</view>
-
-
-	<view class="loading_box" hidden="{{loadbox}}">
- 	 <view class="pulse pulse_1"></view>
- 	 <view class="pulse pulse_2"></view>
- 	 <view class="pulse pulse_3"></view>
- 	 <view class="pulse pulse_4"></view>
-	</view>
-
-
-
+	</form>
 </view>

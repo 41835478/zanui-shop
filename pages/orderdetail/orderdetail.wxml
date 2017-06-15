@@ -68,7 +68,7 @@
 	</block>
 
 	<view class="zan-cell">
-	<view class="zan-cell__hd zan-font-12" style="margin-right: 5px;">配送方式</view>
+	<view class="zan-cell__hd zan-font-12" style="margin-right: 5px;">配送员编号</view>
 	<view class="zan-cell__bd"></view>
 	<view class="zan-cell__ft zan-c-gray-dark zan-font-12">{{detail.expresssn}}</view>
 	</view>
@@ -76,6 +76,10 @@
 	<view class="zan-cell">
 	<view class="zan-cell__hd zan-font-12" style="width: 200rpx">备注信息</view>
 	<view class="zan-cell__bd">{{detail.remark}}</view>
+	</view>
+	<view class="zan-cell"  wx:if="{{detail.remarksaler}}">
+	<view class="zan-cell__hd zan-font-12" style="width: 200rpx">商家反馈</view>
+	<view class="zan-cell__bd zan-c-red">{{detail.remarksaler}}</view>
 	</view>
 
 
@@ -90,12 +94,21 @@
 	<view class="zan-cell__bd"></view>
 	<view class="zan-cell__ft zan-font-12">{{detail.createtime}}</view>
 	</view>
+	<view class="zan-cell" wx:if="{{detail.sendtime}}">
+	<view class="zan-cell__hd zan-font-12" style="margin-right: 5px;">商家处理时间</view>
+	<view class="zan-cell__bd"></view>
+	<view class="zan-cell__ft zan-font-12">{{detail.sendtime}}</view>
+	</view>
+
 
 	</view>
 	<!-- 商品详情结束 -->
 	<view class="zan-panel">
+	<view class="zan-cell zan-font-12">
+	<view class="zan-cell__bd">优惠后</view><view class="zan-cell__ft"></view>	
+	</view>
 	<view class="panel-no-border zan-cell zan-font-12">
-	<view class="zan-cell__bd">商品金额</view><view class="zan-cell__ft">￥{{detail.goodsprice}}</view>	
+	<view class="zan-cell__bd">商品金额</view><view class="zan-cell__ft">￥{{detail.price}}</view>	
 	</view>
 	<view class="panel-no-border zan-cell zan-font-12">
 	<view class="zan-cell__bd">运费</view><view class="zan-cell__ft">+￥0</view>	
@@ -103,19 +116,8 @@
 	</view>
 	<!-- 费用介绍结束 -->
 	<view class="zan-panel btn-container" style="width: 100%">
-	<view class="tongji-btn zan-pull-left">合计：<text class="zan-c-red">￥{{detail.goodsprice}}</text></view>
-    <button class="zan-btn zan-btn--large zan-btn--danger zan-pull-right" style="width: 40%" bindtap="orderPay"><text wx:if="{{ detail.status ==-1|| detail.status ==2}}">支付</text><text wx:if="{{ detail.status ==1|| detail.status ==3}}">关闭订单</text></button>
+	<view class="tongji-btn zan-pull-left " style="width: 25vh">合计：<text class="zan-c-red">￥{{detail.price}}</text></view>
+    <button class="zan-btn zan-btn--large zan-btn--danger zan-pull-right" style="width: 20vh"><text wx:if="{{ detail.status ==-1|| detail.status ==2}}" bindtap="orderPay" data-orderid="{{detail.id}}">立即支付</text><text wx:if="{{ detail.status ==1|| detail.status ==3}}" bindtap="closeOrder"  data-orderid="{{detail.id}}">关闭订单</text></button>
 	</view>
-
-
-	<view class="loading_box" hidden="{{loadbox}}">
- 	 <view class="pulse pulse_1"></view>
- 	 <view class="pulse pulse_2"></view>
- 	 <view class="pulse pulse_3"></view>
- 	 <view class="pulse pulse_4"></view>
-	</view>
-
-
-
 </view>
 

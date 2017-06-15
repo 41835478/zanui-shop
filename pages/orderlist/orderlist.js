@@ -30,8 +30,7 @@ Page(Object.assign({}, Zan.Tab, {
       status1:[],
       status2:[],
       status3:[],
-      status4:[],
-      loadbox:false
+      status4:[],     
   },
 
     handleZanTabChange(e) {
@@ -47,8 +46,8 @@ Page(Object.assign({}, Zan.Tab, {
    swiperChange: function (e) {
     // console.log(e);
     var that=this
-    that.setData({
-      loadbox:false
+    wx.showLoading({
+      title: '加载中',
     })
     var componentId ="tab";
     var statusId;
@@ -76,24 +75,14 @@ Page(Object.assign({}, Zan.Tab, {
     this.setData({
       [`${componentId}.selectedId`]: e.detail.current
     })
-    wx.request({
-      url:'https://api.eshandz.cn/api/order/getOrderInfo',
-      data:{sessionId:wx.getStorageSync('sessionId'),status:statusId},
-      method:'get',
-      success:function(res){
-        // console.log(res);
-        that.setData({
-          [`${current}`]:res.data.data,
-          loadbox:true
-        })
-      },
-      fail:function(){},
-      complete:function(){}
-    });
+    that.loadDataRequest(current,statusId,that);
 
   },
   onLoad:function(options){
-    var that=this;      
+    var that=this;
+    wx.showLoading({
+    title: '加载中',
+    })      
     // console.log(that.data.status0)
     wx.getSystemInfo({
       success: function(res) {
@@ -111,23 +100,54 @@ Page(Object.assign({}, Zan.Tab, {
     // console.log(options['selectedId'])
     if(options['selectedId']==0){
     var current="status"+options['selectedId']
+    var statusId=4;    
+    that.loadDataRequest(current,statusId,that);
+
+    }
+
+  },
+  checkFinish:function(finishTime,orderid){
+    var that=this;
+    var dateNow=new Date();
+    var timeNow=dateNow.getTime();
+    var caltime=finishTime-timeNow;
+    if (caltime <= 0) {
+        wx.request({
+            url:'https://api.eshandz.cn/api/order/closeOrder',
+            data:{sessionId:wx.getStorageSync('sessionId'),orderid:orderid},
+            method:'POST',
+            success:function(res){
+              // console.log(res);              
+            },
+            fail:function(){},
+            complete:function(){}
+          });      
+    }
+    return true;
+
+  },
+  loadDataRequest:function(current,statusId,that){
     wx.request({
       url:'https://api.eshandz.cn/api/order/getOrderInfo',
-      data:{sessionId:wx.getStorageSync('sessionId'),status:4},
+      data:{sessionId:wx.getStorageSync('sessionId'),status:statusId},
       method:'get',
       success:function(res){
         // console.log(res);
+      for (var i = res.data.data.length - 1; i >= 0; i--) {
+          if(res.data.data[i].status==-1){
+          var finishTime=res.data.data[i].finishtimeStap;
+          var orderid=res.data.data[i].id;          
+          that.checkFinish(finishTime,orderid);
+        }
+      }
         that.setData({
-          [`${current}`]:res.data.data,
-          loadbox:true
+          [`${current}`]:res.data.data,          
         })
-
+         wx.hideLoading()
       },
       fail:function(){},
       complete:function(){}
     });
-    }
-
   },
 
   //确认支付
@@ -191,18 +211,18 @@ Page(Object.assign({}, Zan.Tab, {
       success: function(res) {
         // console.log(res);
         if (res.confirm) {
-          console.log('用户点击确定')          
+          // console.log('用户点击确定')          
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          // console.log('用户点击取消')
           wx.request({
             url:'https://api.eshandz.cn/api/order/closeOrder',
             data:{sessionId:wx.getStorageSync('sessionId'),orderid:orderid},
             method:'POST',
             success:function(res){
-              console.log(res);
+              // console.log(res);
               if(res.data.code==200){
                 wx.showToast({
-                  title: '取消订单成功！',
+                  title: '关闭订单成功！',
                   icon: 'success',
                   duration: 2000
                 })                
@@ -211,7 +231,7 @@ Page(Object.assign({}, Zan.Tab, {
                   })
               }else if(res.data.code==400){
                 wx.showToast({
-                  title: '取消订单失败！',
+                  title: '关闭订单失败！',
                   icon: 'success',
                   duration: 2000
                 })
@@ -222,7 +242,52 @@ Page(Object.assign({}, Zan.Tab, {
           });
         }
       }
-    })
-    
+    })    
+  },
+  confirmOrder:function(e){
+     var that=this;
+    // var options['selectedId']=0;
+    var orderid=e.currentTarget.dataset.orderid;
+    wx.showModal({
+      title: '提示',
+      content: '确认收货？',
+      confirmText:'返回',
+      cancelText:'确认',
+      success: function(res) {
+        console.log(res);
+        if (res.confirm) {
+          console.log('用户点击确定')          
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+          wx.request({
+            url:'https://api.eshandz.cn/api/order/orderSign',
+            data:{sessionid:wx.getStorageSync('sessionId'),orderid:orderid},
+            method:'POST',
+            success:function(res){
+              console.log(res);
+              if(res.data.code==200){
+                wx.showToast({
+                  title: '确认收货成功！',
+                  icon: 'success',
+                  duration: 2000
+                })                
+                wx.redirectTo({
+                    url: '../../pages/orderlist/orderlist?selectedId=0'
+                  })
+              }else if(res.data.code==400){
+                wx.showToast({
+                  title: '确认失败！',
+                  icon: 'success',
+                  duration: 2000
+                })
+              }
+            },
+            fail:function(){},
+            complete:function(){}
+          });
+        }
+      }
+    })    
+
   }
 }))

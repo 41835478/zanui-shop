@@ -1,1 +1,7 @@
-{}
+{
+  "navigationBarBackgroundColor": "#aec9bc",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "欢迎来到e衫订制",
+  "backgroundColor": "#f9f9f9",
+  "backgroundTextStyle": "light"
+}

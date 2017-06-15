@@ -17,8 +17,7 @@ App({
       success: function (res) {
         //session 未过期，并且在本生命周期一直有效 
           // console.log(res)
-          var sessionId = wx.getStorageSync('sessionId');
-          console.log('储存在本地的sessionid：' + sessionId)
+          var sessionId = wx.getStorageSync('sessionId');          
           if (!sessionId) {
             wx.login({
               success: function (res) {
@@ -29,7 +28,7 @@ App({
                     url: 'https://api.eshandz.cn/api/member/getLoginSession',
                     data: {
                       appid: that.globalData.appid,
-                      token: that.globalData.token,
+                      token: wx.getStorageSync('token'),
                       code: res.code
                     },
                     method: 'get', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
@@ -51,7 +50,8 @@ App({
                 }
               }
             });
-          }        
+          }
+          console.log('储存在本地的sessionid：' + sessionId)        
       },
       fail: function () {      //登录态过期
         wx.login({
@@ -63,7 +63,7 @@ App({
                 url: 'https://api.eshandz.cn/api/member/getLoginSession',
                 data: {
                   appid: that.globalData.appid,
-                  token: that.globalData.token,
+                  token:  wx.getStorageSync('token'),
                   code: res.code
                 },
                 method: 'get', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
@@ -109,6 +109,7 @@ App({
       success: function (res) {
         // console.log(res)              
         that.globalData.token = res.data.data;
+        wx.setStorageSync('token', res.data.data);
         // that.globalData.appid="5288971";
         return res.data.data;
       },

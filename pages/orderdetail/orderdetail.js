@@ -5,38 +5,14 @@ Page({
     loadbox:false,
     clock: '',
     detail:'',
-    steps: [    
-      {
-        current: false,
-        done: false,
-        text: '未付款',
-      },
-      {
-        current: false,
-        done: false,
-        text: '待体验',   
-      },
-      {
-        done: false,
-        current: false,
-        text: '体验中',
-      },
-      {
-        done: false,
-        current: false,
-        text: '已付款'
-      },
-      {
-        done: false,
-        current: false,
-        text: '完成'
-      }
-    ],
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     var that=this;
-    // console.log(that.data.detail);  
+    wx.showLoading({
+    title: '加载中',
+    })
+    
     wx.request({
       url:'https://api.eshandz.cn/api/order/getOrderDetail',
       data:{orderid:options['orderid']},
@@ -44,19 +20,23 @@ Page({
       success:function(res){
         console.log(res); 
         that.setData({
-          detail:res.data.data,
-          loadbox:true
+          detail:res.data.data,       
         });
+         wx.hideLoading()
          
       },
       fail:function(){},
       complete:function(){}
-    });
-
-    // setTimeout(function(){
-      that.reflesh(that);
-    // },1000);
-       
+    }); 
+  },
+  onShow:function(){
+    var that=this;
+    setTimeout(function(){
+      console.log(that.data.detail); 
+    if(that.data.detail.status==-1){
+     that.reflesh(that);      
+    }
+  },500)
   },
   reflesh:function(that){
     var endtime=that.data.detail.finishtimeStap;
@@ -115,7 +95,7 @@ Page({
     if(sec){
       ret=ret+sec+"秒 ";
     }   
-    ret= '还有 '+ret+'订单将自动关闭，请尽快处理';
+    ret=ret+'后订单将自动关闭，请尽快处理';
     return ret;
 
   },
@@ -167,6 +147,51 @@ Page({
           })
       },
     })
-  }
+  },
+  closeOrder:function(e){
+    var that=this;
+    // var options['selectedId']=0;
+    var orderid=e.currentTarget.dataset.orderid;
+    wx.showModal({
+      title: '提示',
+      content: '订单还没有支付，确定要取消吗？',
+      confirmText:'再考虑下',
+      cancelText:'关闭订单',
+      success: function(res) {
+        console.log(res);
+        if (res.confirm) {
+          console.log('用户点击确定')          
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+          wx.request({
+            url:'https://api.eshandz.cn/api/order/closeOrder',
+            data:{sessionId:wx.getStorageSync('sessionId'),orderid:orderid},
+            method:'POST',
+            success:function(res){
+              console.log(res);
+              if(res.data.code==200){
+                wx.showToast({
+                  title: '关闭订单成功！',
+                  icon: 'success',
+                  duration: 2000
+                })                
+                wx.redirectTo({
+                    url: '../../pages/orderlist/orderlist?selectedId=0'
+                  })
+              }else if(res.data.code==400){
+                wx.showToast({
+                  title: '关闭订单失败！',
+                  icon: 'success',
+                  duration: 2000
+                })
+              }
+            },
+            fail:function(){},
+            complete:function(){}
+          });
+        }
+      }
+    })    
+  },
 
 })

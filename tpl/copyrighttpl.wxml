@@ -1,6 +1,6 @@
 <template name="copyright">
 <view class="copyright">
-	<view class="copyright-logo"><view class="iconfont iconCopyRight"></view><text>WeWin</text></view>
-	<view class="copyright-title">WeWin工作室提供技术支持</view>
+	<view class="copyright-logo"><view class="iconfont iconCopyRight"></view><text>SvenBarnett</text></view>
+	<view class="copyright-title">SvenBarnett提供技术支持</view>
 </view>
 </template>

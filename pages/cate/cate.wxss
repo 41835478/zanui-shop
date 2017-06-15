@@ -6,9 +6,6 @@ page{
 .container{
 	height: 100vh;
 }
-scroll-view{
-	height: 100vh;
-}
 
 .zan-cell__hd image{
 	border-radius: 50%;

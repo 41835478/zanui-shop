@@ -13,6 +13,9 @@ Page({
   //事件处理函数 
   onLoad: function () {    
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     that.setData({ windowHeight:app.globalData.windowHeight})//设置滚动区域全屏 
       wx.request({
         url: 'https://api.eshandz.cn/api/index/getRandGoods',
@@ -31,7 +34,8 @@ Page({
                   });
                   that.setData({
                     loadbox:true,
-                  })           
+                  })
+                  wx.hideLoading()           
                   break;
                 case 201:
                   if(that.data.nomore){
@@ -65,7 +69,7 @@ Page({
    onShareAppMessage: function () {
     return {
       title: 'e衫订制商城',
-      path: '/pages/index/index',
+      path: '/pages/notice/notice',
       success: function(res) {
         // 分享成功
       },

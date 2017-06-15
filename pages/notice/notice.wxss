@@ -9,27 +9,16 @@ scroll-view{
 	height: 100vh;
 }
 .container image{
-	overflow: hidden;  	                                   
+	overflow: hidden;
 }
 .imgIndex{
-	/*background-image:Alpha(Opacity=100, FinishOpacity=100, Style=2, StartX=0, StartY=0, FinishX=0, FinishY=900);*/
-	/*filter: alpha(opacity=100,finishopacity=0,style=2);*/
-}
-.enterIndex{
-	width: 520rpx;
-	height: 160rpx;
-	border-radius: 20rpx;
-	position: absolute;
-	z-index: 100;
-	/*background-color:rgba(233,100,100,0.3);	*/
-	bottom: 178rpx;
-	left: 120rpx;
-/*	animation:mymove 5s infinite alternate;
-	-webkit-animation:mymove 5s infinite alternate; /*Safari and Chrome*/
 
 }
-/*	@keyframes mymove
-	{
-		from {background-color:red;}
-		to {background-color:blue;}
-	}*/
+canvas{
+	position: absolute;
+	z-index: 100;
+	right:20rpx;
+	top: 20rpx;
+	border-radius: 50%;
+	/*background-color: rgba(0,0,0,0.4);*/
+}

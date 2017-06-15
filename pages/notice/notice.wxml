@@ -1,9 +1,8 @@
 <!--pages/notice/notice.wxml-->
 <view class="container">
 <scroll-view>
-<image class="imgIndex" style="width: {{windowWidth}}px;height:{{windowHeight}}px" src="http://ohy7djn2s.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20170417201809.png"></image>
-
-<text class="enterIndex" bindtap="enterIndex"></text>
+<image class="imgIndex" style="width: {{windowWidth}}px;height:{{windowHeight}}px" src="http://ohy7djn2s.bkt.clouddn.com/58ef8e6111111111148cec.jpg"></image>
+<canvas style="width: 60px;height: 60px;" canvas-id="canvasArc" bindtap="enterIndex"></canvas>
 </scroll-view>
 </view>
 

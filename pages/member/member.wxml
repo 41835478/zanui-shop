@@ -28,15 +28,17 @@
 	    	<view class="zan-cell__hd"></view>
 	    	<view class="zan-cell__bd">联系客服</view>
 	    	<view class="zan-cell__ft"></view>
-	    </view>
-	    <view class="zan-cell zan-cell--access" bindtap="showToast">
-	    	<view class="zan-cell__hd"></view>
-	    	<view class="zan-cell__bd">关于</view>
-	    	<view class="zan-cell__ft"></view>
-	    </view>
+	    </view>	    
 		<view class="zan-cell zan-cell--access" bindtap="showCopyRight">
 	    	<view class="zan-cell__hd"></view>
 	    	<view class="zan-cell__bd">合作联系</view>
+	    	<view class="zan-cell__ft"></view>
+	    </view>
+	    </view>
+	    <view class="zan-panel">
+		<view class="zan-cell zan-cell--access" bindtap="showToast">
+	    	<view class="zan-cell__hd"></view>
+	    	<view class="zan-cell__bd">关于</view>
 	    	<view class="zan-cell__ft"></view>
 	    </view>
 	    </view>

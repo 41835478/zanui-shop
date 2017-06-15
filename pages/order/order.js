@@ -19,6 +19,7 @@ Page(Object.assign({}, Zan.Switch,Zan.TopTips, {
     click:'on',
     remark:'',
     spec:'',
+    priceAll:'',
     array: ['12点-14点', '13点-15点', '14点-16点', '15点-17点','16点-18点', '17点-19点', '18点-20点', '19点-21点','20点-22点'],
   },
 
@@ -34,6 +35,9 @@ Page(Object.assign({}, Zan.Switch,Zan.TopTips, {
   },
   onLoad:function(options){
     var that=this;
+    wx.showLoading({
+     title: '加载中',
+    })
     // 页面初始化 options为页面跳转所带来的参数
     // console.log(options);
 
@@ -49,12 +53,15 @@ Page(Object.assign({}, Zan.Switch,Zan.TopTips, {
       data:{id:goodsid,appid:app.globalData.appid, token:app.globalData.token},
       method:'get',
       success:function(res){
-        // console.log(res); 
+        console.log(res); 
+        var priceAll=res.data.data.marketprice*options.total;
+        priceAll = Math.floor(priceAll*100)/100;
         that.setData({
           chooseoptionthumb:options.thumb,
           total:options.total,
           good:res.data.data,
-          actionId:options.actionid
+          actionId:options.actionid,
+          priceAll:priceAll
         })
 
       },
@@ -70,9 +77,7 @@ Page(Object.assign({}, Zan.Switch,Zan.TopTips, {
         that.setData({
           spec:res.data.data.title
         })     
-        that.setData({
-          loadbox:true
-        })
+        wx.hideLoading()
       },
       fail:function(){},
       complete:function(){}
@@ -124,9 +129,9 @@ Page(Object.assign({}, Zan.Switch,Zan.TopTips, {
   },
 
 
-  orderPay: function () {
+  orderPay: function (e) {
       var that = this;
-
+      var formId=e.detail.formId;//用于发送模板消息
     if(!that.data.address){
         that.showZanTopTips('请选择收货地址！');
         return false
@@ -143,7 +148,8 @@ Page(Object.assign({}, Zan.Switch,Zan.TopTips, {
       that.setData({
         click:''
       })
-      // console.log("dainji")
+      // console.log(formId);
+      // return false;
 
       // var orderDetail=new Array();
       var appid=app.globalData.appid;
@@ -164,11 +170,13 @@ Page(Object.assign({}, Zan.Switch,Zan.TopTips, {
         "marketprice":that.data.good.marketprice,
         // "marketprice":0.01,
         "address":that.data.address,
+        "formId":formId,
 
         "productprice":that.data.good.productprice,
         "remark":that.data.remark+' 体验时间：'+that.data.dateValue+' '+that.data.timeValue
              };
-      // console.log(orderDetail)
+      console.log(orderDetail)
+      // return false;
 
       var type=that.data.orderDetail.actionid;     
 
@@ -184,6 +192,7 @@ Page(Object.assign({}, Zan.Switch,Zan.TopTips, {
           sessionId:sessionId,
           data:orderDetail,
           type:type,
+          formId:formId,
         },
         method:'POST',
         header: {
@@ -204,6 +213,24 @@ Page(Object.assign({}, Zan.Switch,Zan.TopTips, {
                'signType': 'MD5',
                'paySign':  data.paySign,
                'success':function(res){
+                 console.log(res)
+                 if(res.errMsg=='requestPayment:ok'){
+                   wx.request({
+                     url: 'https://api.eshandz.cn/api/order/sendTplPay',
+                     data: {orderDetail:orderDetail},
+                     method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+                     // header: {}, // 设置请求的 header
+                     success: function(res){
+                       // success
+                     },
+                     fail: function() {
+                       // fail
+                     },
+                     complete: function() {
+                       // complete
+                     }
+                   })
+                 }
                   that.setData({
                     loadbox:true
                   })

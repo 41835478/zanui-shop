@@ -1,6 +1,7 @@
 <import src="/tpl/copyrighttpl.wxml"/>
-<template name="orderlist" style="height: 100vh">
-	<scroll-view scroll-y="true" style="height:100vh;">
+<template class="ordertpl" name="orderlist" style="height: 100vh">
+	<scroll-view class="ordertpl-scroll" scroll-y="true" style="height:100vh;">
+	<view  class="ordertpl-scroll" style="height:100%;">
 	<view style="margin-top: 55px;"></view>
     <block wx:for="{{statusData}}">
 	<view class="zan-panel">
@@ -35,7 +36,7 @@
 	<view class="zan-cell zan-font-12">
 	<view class="zan-cell__hd"></view>
 	<view class="zan-cell__bd"></view>
-	<view class="zan-cell__ft zan-font-12">合计：<text class="zan-c-red">￥{{item.goodsprice}}</text></view>
+	<view class="zan-cell__ft zan-font-12">合计：<text class="zan-c-red">￥{{item.price}}</text></view>
 	</view>
 	<view class="zan-cell">
 	<view class="zan-cell__hd"></view>
@@ -47,7 +48,7 @@
 	 <view class="zan-label zan-label--primary zan-label--middle zan-label--plain zan-pull-right" data-orderid="{{item.id}}" bindtap="confirmOrder">确认收货</view>
 	 </block>
 	 <block wx:if="{{!(item.status==0||item.status==3)}}">
-	 <view class="zan-label zan-label--primary zan-label--middle zan-label--plain zan-pull-right" data-orderid="{{item.id}}" data-body="{{item.listone.title}} {{item.listone.optionname}}" bindtap="payOrder">去支付</view>
+	 <view class="zan-label zan-label--{{item.status==1?'disabled':'primary'}} zan-label--middle zan-label--plain zan-pull-right" data-orderid="{{item.id}}" data-body="{{item.listone.title}} {{item.listone.optionname}}" bindtap="{{item.status==1?'':'payOrder'}}">去支付</view>
 	 </block>
 	 <block wx:if="{{item.status==3}}">
 	 <view class="zan-label zan-label--middle zan-label--plain zan-pull-right">完成订单</view>
@@ -59,5 +60,6 @@
 	</view>
 	</block>
 	<template is="copyright"></template>
+	</view>
 	</scroll-view>
 </template>

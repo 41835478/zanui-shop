@@ -34,13 +34,5 @@
 	<template is="orderlist" data="{{statusData:status4}}"></template>
     </swiper-item>
     <!-- 已经付款结束 -->
-  <view class="loading_box" hidden="{{loadbox}}">
-   <view class="pulse pulse_1"></view>
-   <view class="pulse pulse_2"></view>
-   <view class="pulse pulse_3"></view>
-   <view class="pulse pulse_4"></view>
-   </view>
-
-
   </swiper>
 </view>

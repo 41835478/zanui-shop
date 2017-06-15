@@ -16,7 +16,7 @@
 	z-index: 10;
 }
 .tongji-btn{
- 	margin-left:200rpx;
+ 	margin-left:50rpx;
  	margin-top:35rpx;
 }
 .btn-on{

@@ -43,5 +43,9 @@
         "text": "个人中心"
       }
     ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
   }
 }

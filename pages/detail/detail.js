@@ -1,6 +1,7 @@
 // pages/detail/detail.js
 var Zan = require('../../dist/index');
 var app = getApp();
+var Glooption;
 Page(Object.assign({}, Zan.Quantity,Zan.TopTips,{
   data:{
      quantity1: {
@@ -31,7 +32,7 @@ Page(Object.assign({}, Zan.Quantity,Zan.TopTips,{
   needNotcie:function(){
     wx.showModal({
       title: '用户须知',
-      content: '选择体验下单，无须支付，送货上门试穿后支付；目前仅仅支持江大范围',
+      content: '选择体验下单，无须支付，送货上门试穿后再决定是否支付；目前仅仅支持江大范围',
       showCancel:false,
       success: function(res) {
         if (res.confirm) {
@@ -123,25 +124,57 @@ Page(Object.assign({}, Zan.Quantity,Zan.TopTips,{
 
 
   onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
+    // 页面初始化 goodsid为页面跳转所带来的参数
     // console.log(app.globalData.token);
-    var options=options.goodsid;
+    wx.showLoading({
+      title: '加载中',
+    })
+    console.log(options);
+    var goodsid=options['goodsid'];
+    Glooption=goodsid;
     var that = this;
-
-   // console.log(that.data.option);
     wx.request({
       url:'https://api.eshandz.cn/api/index/detail',
-      data:{id:options,appid:app.globalData.appid, token:app.globalData.token},
+      data:{id:goodsid,appid:app.globalData.appid, token:wx.getStorageSync('token')},
       method:'get',
       success:function(res){
-        // console.log(res); 
-        that.setData({slider:res.data.data.thumb_url,good:res.data.data,chooseoptionthumb:res.data.data.thumb})     
-        that.setData({
-          loadbox:true
-        })
+        console.log(res); 
+        switch(res.data.code)
+                {
+                case 200: 
+                 that.setData({slider:res.data.data.thumb_url,good:res.data.data,chooseoptionthumb:res.data.data.thumb})
+                  wx.hideLoading()         
+                  break;
+                case 201:
+                  if(that.data.nomore){
+                    return false
+                  }
+                  break;
+                  case 400:
+                  console.log("商品区加载token验证失败再次请求")
+                  app.onLaunch()
+                  break;
+                default:             
+                }       
       },
       fail:function(){},
       complete:function(){}
     })
   },
+  //  onShareAppMessage: function () {
+  //   var path='/pages/detail/detail?goodsid='+Glooption+'&';
+  //   return {
+  //     title: 'e衫订制商城',
+  //     desc: '免费送货上门',
+  //     path: path,
+  //     success: function(res) {
+  //       // console.log(res);
+  //       console.log(path);
+  //       // 分享成功
+  //     },
+  //     fail: function(res) {
+  //       // 分享失败
+  //     }
+  //   }
+  // },
 }))

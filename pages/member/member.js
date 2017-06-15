@@ -11,6 +11,10 @@ Page(Object.assign({}, Zan.Toast, {
   },
   onLoad:function(options){
         var that=this
+        wx.showLoading({
+         title: '加载中',
+        })
+
     // 页面初始化 options为页面跳转所带来的参数
 
 
@@ -20,7 +24,8 @@ Page(Object.assign({}, Zan.Toast, {
             success: function (res) {
               that.setData({
                 userinfo:res.userInfo
-              })  
+              })
+              wx.hideLoading() 
             }
           })
         }
@@ -29,14 +34,14 @@ Page(Object.assign({}, Zan.Toast, {
   },
   showToast() {
     wx.showModal({
-      title: '关于',
-      content: 'e衫订制是镇江万通鼎文化传媒有限公司旗下产品，本公司致力于为用户提供极致的服务体验，始终坚持“您的微笑是我们最大的追求”公司服务理念，为赢得用户的信赖而努力奋斗！',
+      title: '关于-当前版本V1.6',
+      content: 'e衫订制是镇江万通鼎文化传媒有限公司旗下产品，本公司致力于为用户提供极致的服务体验，始终坚持“您的微笑是我们最大的追求”公司服务理念，为赢得用户的信赖而努力奋斗!',
       showCancel:false,
       success: function(res) {
         if (res.confirm) {
-          console.log('用户点击确定')
+          // console.log('用户点击确定')
         } else if (res.cancel) {
-        console.log('用户点击取消')
+        // console.log('用户点击取消')
         }
     }
     })    
@@ -51,9 +56,9 @@ Page(Object.assign({}, Zan.Toast, {
       success: function(res) {
         console.log(res);
         if (res.confirm) {
-          console.log('用户点击确定');
+          // console.log('用户点击确定');
         } else if (res.cancel) {
-        console.log('用户点击取消');
+        // console.log('用户点击取消');
         that.makeTelphone();
         }
     }
@@ -61,7 +66,7 @@ Page(Object.assign({}, Zan.Toast, {
   },
   makephone(){
     wx.makePhoneCall({
-      phoneNumber: '18860873809' //仅为示例，并非真实的电话号码
+      phoneNumber: '18860876809' //仅为示例，并非真实的电话号码
     })
   },
   makeTelphone(){
@@ -76,7 +81,7 @@ Page(Object.assign({}, Zan.Toast, {
       data:{sessionId:wx.getStorageSync('sessionId')},
       method:'get',
       success:function(res){
-        console.log(res);
+        // console.log(res);
         that.setData({
           status0:res.data.data.status0,
           status1:res.data.data.status1,

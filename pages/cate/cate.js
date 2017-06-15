@@ -16,13 +16,14 @@ Page({
          // console.log(res);       
           switch(res.data.code)
                 {
-                case 200: 
+                case 200:                 
                 var tab = [{ id: '0', title: '全部',advimg:'http://ohy7djn2s.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.png' }]
                 var data = tab.concat(res.data.data)
                 that.setData({ category: data })
                     that.setData({
                       loadbox:true
                     })
+                    wx.hideLoading()
 
                   break;
                 case 201:
@@ -48,6 +49,9 @@ Page({
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     var that=this
+    wx.showLoading({
+      title: '加载中',
+    })
     that.loadcategory();
   },
 })

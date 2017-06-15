@@ -1,7 +1,7 @@
 <!--pages/cate/cate.wxml-->
 <import src="/tpl/copyrighttpl.wxml"/>
 <view class="container">
-<scroll-view>
+<scroll-view height="100vh">
 	<view class="zan-panel" style="margin-top: 0px;">
 	<block wx:for="{{category}}">	
 	<navigator url="../../pages/good/good?cateid={{item.id}}&catename={{item.title}}">
